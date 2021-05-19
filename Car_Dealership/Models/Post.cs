@@ -15,7 +15,6 @@ namespace Car_Dealership.Models
         [MaxLength(100)]
         public string Title { get; set; }
 
-        [Required]
         [MaxLength(256)]
         public string Photo { get; set; }
 

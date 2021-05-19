@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Car_Dealership.Models
 {
-
     public class ApplicationUser : IdentityUser
     {
         public string User_Username { get; set; }
