@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Car_Dealership.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Car_Dealership.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
+
         {
         }
         public DbSet<Car_Dealership.Models.News> News { get; set; }
@@ -18,5 +20,6 @@ namespace Car_Dealership.Data
 
         public DbSet<Post> Posts { get; set; }
         public DbSet<UserPostLike> UserPostLikes { get; set; }
+
     }
 }
