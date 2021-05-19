@@ -17,16 +17,20 @@ namespace Car_Dealership.Controllers
         {
             _logger = logger;
         }
-
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult NewsUpload()
         {
             return View();
         }
+        public IActionResult allNews()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

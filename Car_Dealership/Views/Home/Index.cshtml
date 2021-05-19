@@ -10,7 +10,7 @@
 <br />
 <h1 style="text-align:center">NEWS</h1>
 <br />
-@*<vue-card id="Id" name="Card" img="https://vuejs.org/images/logo.png" class="mb-2"></vue-card>*@
+
 @for (int i = 0; i < 4; i++) {
 <div id="app" class="row">
     <div class="left-side col"> <img src="~/img/Gclass.jpg"/></div>
@@ -74,16 +74,7 @@
             }
         </div>*@
 
-    @section Scripts {
-
-        <partial name="_Card" />
-
-        <script type="text/javascript">
-            var app = new Vue({
-                el: '#app'
-            })
-        </script>
-    }
+    
 
     <style>
         #app {

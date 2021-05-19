@@ -1,0 +1,39 @@
+﻿<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>mongoDB AJAX demo</title>
+    <script type='text/javascript' src='jquery-latest.min.js'></script>
+    <script type='text/javascript'>
+        $(document).ready(function () {
+
+            // GET REQUEST
+            $("#allNews").click(function (event) {
+                event.preventDefault();
+                ajaxGet();
+            });
+
+            // DO GET
+            function ajaxGet() {
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:3000/user/allNews",
+                    success: function (result) {
+                        $('#getResultDiv ul').empty();
+                        $.each(result, function (i, user) {
+                            $('#getResultDiv .list-group').append(News.t + " " + user.lastname + " ")
+				});
+                        console.log("Success: ", result);
+                    },
+                    error: function (e) {
+                        $("#getResultDiv").html("Error");
+                        console.log("ERROR: ", e);
+                    }
+                });
+            }
+        })
+    </script>
+</head>
+<body>
+    <button type="button" id="allNews">click</button>
+</body>
+</html>
