@@ -1,0 +1,57 @@
+﻿
+<form id="form" method="POST" enctype="multipart/form-data">
+    <input id="title" type="text" placeholder="title" required />
+    <input id="description" type="text" placeholder="description" required/>
+    <input type="file" name="image" id="fileUpload" required />
+    <button type="submit">Submit</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  var formData = new FormData();
+
+  $( 'form' ).submit( ( e ) => {
+    jQuery.each( jQuery( '#fileUpload' )[ 0 ].files, function ( i, file ) {
+        formData.append('file', file);
+   @*     formData.set('file', file);*@
+
+    } );
+    $.ajax( {
+      type: 'POST',
+      url: 'http://localhost:3000/user/createPhoto',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function ( result ) {
+        if ( result.status != 0 ) {
+          const newsData = {
+            title: $( "#title" ).val(),
+            description: $( "#description" ).val(),
+            img_path: result.file.filename
+          };
+
+
+          //console.log(result.file.filename)
+
+          $.ajax( {
+            type: 'POST',
+            url: 'http://localhost:3000/user/createNews',
+            data: newsData,
+            dataType: "json",
+            encode: true,
+            success: function ( result ) {
+              if ( result.status != 0 ) {
+                console.log( result )
+                return ;
+              }
+              console.log( result )
+            }
+          } );
+          }
+      }
+    } );
+@*      $('#form')[0].reset();*@
+    e.preventDefault();
+  })
+
+</script>
