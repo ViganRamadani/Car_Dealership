@@ -31,9 +31,17 @@ namespace Car_Dealership
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            /*services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();*/
+
+
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddAuthentication()
+                .AddGoogle(options =>
+               {
+                   options.ClientId = "620242914822-3r24118vd0qgrminmtq80u7j5gh4mm3e.apps.googleusercontent.com";
+                   options.ClientSecret = "ktlLwqgJV9EQESG7BZ3w3rac";
+               });
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
