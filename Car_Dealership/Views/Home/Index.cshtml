@@ -22,7 +22,56 @@
 </div>
 <br />
 }
+<script type='text/javascript'>
 
+
+
+            // DO GET
+
+    function ajaxGet() {
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:3000/user/allNews",
+                success: function (result) {
+
+                    $.each(result, function (key, value) {
+                    @*  alert("Title: " + result[key].title + "; Description: " + result[key].description + ";");*@
+                       console.log( result[key].image);
+                    });
+                    $.each(result, function (index, obj) {
+                        var tr = $("<div class="left - side col" ></div>");
+
+
+                        tr.append("<p>" + obj.title + "</p>");
+                        tr.append("<p>" + obj.description + "</p>");
+                        tr.append("<p>" + obj.img_path + "</p>");
+                        tr.append("<p>" + obj.createdAt + "</p><hr>");
+
+
+                        $("#contain").append(tr);
+                    });
+                    @*if (results.length > 0) {
+                    $('#title').text(result[0].title);
+                    $('#description').text(result[0].description);
+                        $('#img_path').text(result[0].img_path);
+                    }
+                    else {
+                        alert("No data.");
+                    }*@
+                    console.log("Success: ", result);
+                },
+                error: function (e) {
+                    $("#getResultDiv").html("Error");
+                    console.log("ERROR: ", e);
+                }
+
+            });
+
+        }
+
+
+</script>
 
     <style>
         * {
