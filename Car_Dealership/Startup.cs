@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,11 +33,13 @@ namespace Car_Dealership
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-
-            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
-
+            services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI();
+           
             services.AddAuthentication()
-                .AddGoogle(options =>
+                .AddGoogle(options => 
                {
                    options.ClientId = "620242914822-3r24118vd0qgrminmtq80u7j5gh4mm3e.apps.googleusercontent.com";
                    options.ClientSecret = "ktlLwqgJV9EQESG7BZ3w3rac";
