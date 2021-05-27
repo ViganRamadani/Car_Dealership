@@ -1,19 +1,24 @@
 ﻿
-<form id="form" method="POST" enctype="multipart/form-data">
-    <input id="title" type="text" placeholder="title" required />
-    <input id="description" type="text" placeholder="description" required/>
-    <input type="file" name="image" id="fileUpload" required />
-    <button type="submit">Submit</button>
-</form>
-
+<div>
+    <h1 class="title">Create News</h1>
+    <form id="form" method="POST" enctype="multipart/form-data">
+        <input id="title" type="text" placeholder="title" required />
+        <input id="description" type="text" placeholder="description" required />
+        <input type="file" name="image" id="fileUpload" required />
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<style>
+   
+</style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
   var formData = new FormData();
 
   $( 'form' ).submit( ( e ) => {
     jQuery.each( jQuery( '#fileUpload' )[ 0 ].files, function ( i, file ) {
-        formData.append('file', file);
-   @*     formData.set('file', file);*@
+@*        formData.append('file', file);*@
+        formData.set('file', file);
 
     } );
     $.ajax( {
@@ -56,5 +61,5 @@
       @*alert("News was uploaded successfully "+location.reload(true));*@
       @*alert(location.hostname);*@
   })
-    
+
 </script>

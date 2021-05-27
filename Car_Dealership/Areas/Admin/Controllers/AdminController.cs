@@ -1,4 +1,6 @@
-﻿using Car_Dealership.Models;
+﻿using Car_Dealership.Areas.Admin.ViewModels;
+using Car_Dealership.Data;
+using Car_Dealership.Models;
 using Car_Dealership.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,15 +9,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Car_Dealership.Controllers
+namespace Car_Dealership.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class AdminController:Controller
     {
-        private RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _context;
+        private RoleManager<IdentityRole> _roleManager;
 
-        public AdminController(RoleManager<IdentityRole> roleManager)
+        public AdminController(UserManager<ApplicationUser> userManager, ApplicationDbContext context, RoleManager<IdentityRole> roleManager)
         {
-            this.roleManager = roleManager;
+            _userManager = userManager;
+            _context = context;
+            _roleManager = roleManager;
         }
 
         /*public RoleManager<IdentityRole> RoleManager { get; }*/
@@ -30,18 +37,19 @@ namespace Car_Dealership.Controllers
             if (ModelState.IsValid)
             {
                 IdentityRole identityRole = new IdentityRole{Name = model.RoleName};
-                IdentityResult result = await roleManager.CreateAsync(identityRole);
+                IdentityResult result = await _roleManager.CreateAsync(identityRole);
             
-            if (result.Succeeded)
+            /*if (result.Succeeded)
             {
-                return RedirectToAction("index","home");
-            }
+               *//* return RedirectToAction("index","home");*//*
+
+            }*/
             foreach(IdentityError error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
             }
-            return View();
+            return View(model);
         }
     }
 }
