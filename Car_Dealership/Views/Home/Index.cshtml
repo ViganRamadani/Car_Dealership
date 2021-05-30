@@ -3,25 +3,41 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
 <br />
 <h1 style="text-align:center">NEWS</h1>
 <br />
 
-@for (int i = 0; i < 4; i++) {
-<div id="app" class="row">
-    <div class="left-side col"> <img src="~/img/Gclass.jpg"/></div>
-    <div class="right-side col">
-        <h6> Card Vue Component</h6>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-    </div>
+<div id="result"></div>
+<button type="button" class="btn btn-primary btn-block" id="allNews" onclick="ajaxGet()">click to view all news.</button>
+@*<div id="title"></div>
+    <div id="description"></div>
+    <div id="img_path"></div>*@
+<div id="contain"></div>
 
-</div>
-<br />
+@for (int i = 0; i < 4; i++)
+{
+    <div id="app" class="row">
+        <div class="left-side col"> <img src="~/img/Gclass.jpg" /></div>
+        <div class="right-side col">
+            <h6> Card Vue Component</h6>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        </div>
+
+    </div>
+    <br />
 }
+<script type='text/javascript'></script>
+
+@section Scripts{
+    <script type='text/javascript' src='https://code.jquery.com/jquery-3.5.0.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+}
+
+
+
+
+
 <script type='text/javascript'>
 
 
@@ -40,7 +56,7 @@
                        console.log( result[key].image);
                     });
                     $.each(result, function (index, obj) {
-                        var tr = $("<div class="left - side col" ></div>");
+                        var tr = $("<div></div>");
 
 
                         tr.append("<p>" + obj.title + "</p>");
@@ -73,60 +89,62 @@
 
 </script>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        .left-side img{
-            width:350px;
-           
-        }
-        .right-side {
-           
-            float: right;
-        }
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .left-side img {
+        width: 350px;
+    }
+
+    .right-side {
+        float: right;
+    }
 
         .right-side p {
             min-width: 150px;
         }
-        @@media screen and (max-width: 1213px) {
-           .right-side {
-            float:right;
-            }
-           }
-        @@media screen and (max-width: 770px) {
-            .left-side {
-                margin:0 auto;
-            }
-            .right-side{
-                text-align:center;
-            }
+
+    @@media screen and (max-width: 1213px) {
+        .right-side {
+            float: right;
         }
-        @@media screen and (max-width: 365px) {
-            .left-side img{
-                width:250px;
-                margin: 0 auto;
-                min-width:200px;
-            }
+    }
 
-            
+    @@media screen and (max-width: 770px) {
+        .left-side {
+            margin: 0 auto;
         }
-    </style>
-    @*<div id="app" class="card-deck pt-4">
-            @for (var num = 1; num <= 4; num++)
-            {
-                var Card = $"Card_{num}";
 
-                <vue-card id="@Card" name="@Card" img="https://vuejs.org/images/logo.png" class="mb-6">
-                 <h6>Card @num</h6>
-                </vue-card>
-            }
-        </div>*@
-
-    
-
-    <style>
-        #app {
-            background-color: lightgray;
+        .right-side {
+            text-align: center;
         }
-    </style>
+    }
+
+    @@media screen and (max-width: 365px) {
+        .left-side img {
+            width: 250px;
+            margin: 0 auto;
+            min-width: 200px;
+        }
+    }
+</style>
+@*<div id="app" class="card-deck pt-4">
+        @for (var num = 1; num <= 4; num++)
+        {
+            var Card = $"Card_{num}";
+
+            <vue-card id="@Card" name="@Card" img="https://vuejs.org/images/logo.png" class="mb-6">
+             <h6>Card @num</h6>
+            </vue-card>
+        }
+    </div>*@
+
+
+
+<style>
+    #app {
+        background-color: lightgray;
+    }
+</style>

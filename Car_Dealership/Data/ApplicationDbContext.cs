@@ -16,8 +16,10 @@ namespace Car_Dealership.Data
         {
         }
         public DbSet<Car_Dealership.Models.News> News { get; set; }
-
+        
+        public DbSet<Auto> Autos { get; set; }
         public DbSet<Post> Posts { get; set; }
+       
 
         public DbSet<Warranty> Warranties { get; set; }
         public DbSet<UserPostLike> UserPostLikes { get; set; }

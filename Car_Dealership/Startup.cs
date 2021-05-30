@@ -32,12 +32,14 @@ namespace Car_Dealership
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
-            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI();
-           
+
+          
+
             services.AddAuthentication()
                 .AddGoogle(options => 
                {
@@ -48,7 +50,9 @@ namespace Car_Dealership
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
-
+/*services.AddDefaultIdentity<PortalUser>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();*/
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -60,7 +64,6 @@ namespace Car_Dealership
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -71,13 +74,15 @@ namespace Car_Dealership
             app.UseAuthentication();
             app.UseAuthorization();
 
+            
+                app.UseEndpoints(endpoints => {
+                    endpoints.MapControllerRoute(
+                    name: "MyAdmin",
+                    pattern: "{area:exists}/{controller=Admin}/{action=ListRoles}/{id?}");
+                });
+
             app.UseEndpoints(endpoints =>
             {
-
-                endpoints.MapControllerRoute(
-                    name: "MyAdmin",
-                    pattern: "{area:exists}/{controller=Admin}/{action=CreateRole}/{id?}");
-
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

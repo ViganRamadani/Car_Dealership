@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Car_Dealership.Models.Car>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Engine)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Body_Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Start_Production)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.End_Production)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sets)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Doors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fuel_Consumption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fuel_Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Acceleration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Max_Speed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Power)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Torque)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Engine_Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Numeber_Cylindres)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Engine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Body_Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start_Production)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.End_Production)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Photo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sets)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fuel_Consumption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fuel_Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Acceleration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Max_Speed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Power)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Torque)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Engine_Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numeber_Cylindres)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

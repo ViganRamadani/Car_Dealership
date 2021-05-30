@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Identity;
+    @model IEnumerable<IdentityRole>
+
+    @{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewBag.Title = "All Roles";
+    }
+    <h1>All Roles</h1>
+
+    @if (Model.Any())
+    {
+        <a class="btn btn-primary" asp-action="CreateRole" asp-controller="Admin">Add new role</a>
+
+       @foreach(var role in Model)
+        {
+            <div class="card mb-3">
+                <div class="card-header">RoleId : @role.Id</div>
+                <div class="card-body">@role.Name</div>
+                <div class="card-footer">
+                    <a class="btn btn-primary" asp-action="EditRole" asp-controller="Admin" asp-route-id="@role.Id">Edit</a>
+                    <a href="#">Delete</a>
+
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+    <div class="card">
+        <div class="card-header">
+            No roles created yet
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Use the buttom below to create role</h5>
+            <a class="btn btn-primary" style="width:auto" asp-area="Admin" asp-controller="Admin" asp-action="CreateRole">Create Role</a>
+            <a asp-area="Admin" asp-controller="AdminController" asp-action="CreateRole">Create Roles</a>
+        </div>
+    </div>
+    }
