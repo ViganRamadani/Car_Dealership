@@ -98,38 +98,83 @@ namespace Car_Dealership.Controllers
          }*/
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Brand,Engine,Body_Type,Start_Production,End_Production,Photo,Sets,Doors,Fuel_Consumption,Fuel_Type,Acceleration,Max_Speed,Power,Torque")] Auto auto, CreateAutoViewModel model)
+        public async Task<IActionResult> Create(CreateAutoViewModel model)
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName = null;
+                string uniqueFileName = UploadedFile(model);
 
-
-                if (model.Photo != null)
-                {
-                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "postphotos");
-
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    FileStream fileStream = new FileStream(filePath, FileMode.Create);
-                    model.Photo.CopyTo(fileStream);
-                    fileStream.Close();
-
-                }
-                var user = await _userManager.GetUserAsync(User);
                 Auto autos = new Auto
                 {
-                    Brand = model.Title,
+                    Brand = model.Brand,
+                    Engine = model.Engine,
+                    Start_Production = model.Start_Production,
+                    End_Production = model.End_Production,
+                    Doors = model.Doors,
+                    Fuel_Consumption = model.Fuel_Consumption,
+                    Sets = model.Sets,
                     Photo = uniqueFileName,
+                    Price = model.Price,
+                    Fuel_Type = model.Fuel_Type,
+                    Body_Type = model.Body_Type,
+                    Acceleration = model.Acceleration,
+                    Max_Speed = model.Max_Speed,
+                    Power = model.Power,
+                    Torque = model.Torque
+
+
                 };
-
-
-                var autoList = _context.Autos.Add(autos);
-                _context.Add(autoList);
+                _context.Add(autos);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(auto);
+            return View();
+            /* if (ModelState.IsValid)
+             {
+                 string uniqueFileName = null;
+
+
+                 if (model.Photo != null)
+                 {
+                     string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "postphotos");
+
+                     uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                     FileStream fileStream = new FileStream(filePath, FileMode.Create);
+                     model.Photo.CopyTo(fileStream);
+                     fileStream.Close();
+
+                 }
+                 var user = await _userManager.GetUserAsync(User);
+                 Auto autos = new Auto
+                 {
+                     Brand = model.Brand,
+                     Photo = uniqueFileName,
+                 };
+
+
+                 var autoList = _context.Autos.Add(autos);
+                 _context.Add(autoList);
+                 await _context.SaveChangesAsync();
+                 return RedirectToAction(nameof(Index));
+             }
+             return View(auto);*/
+        }
+        private string UploadedFile(CreateAutoViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.Photo != null)
+            {
+                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "img");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Photo.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
 
 
@@ -154,7 +199,7 @@ namespace Car_Dealership.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Brand,Engine,Body_Type,Start_Production,End_Production,Photo,Sets,Doors,Fuel_Consumption,Fuel_Type,Acceleration,Max_Speed,Power,Torque")] Auto auto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Brand,Engine,Body_Type,Start_Production,End_Production,Photo,Sets,Doors,Fuel_Consumption,Fuel_Type,Acceleration,Max_Speed,Power,Torque,Price")] Auto auto)
         {
             if (id != auto.Id)
             {

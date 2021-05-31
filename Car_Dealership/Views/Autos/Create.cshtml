@@ -11,7 +11,155 @@
 
 <h4>Auto</h4>
 <hr />
-<div class="row">
+<div class="col-md-10 mx-auto py-4">
+    <div class="card">
+        <div class="card-header bg-primary text-uppercase text-white">
+            <h4>Add New </h4>
+        </div>
+        <div class="card-body">
+            <form enctype="multipart/form-data" asp-action="Create">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Brand" class="control-label"></label>
+                            <input asp-for="Brand" class="form-control" />
+                            <span asp-validation-for="Brand" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Engine" class="control-label"></label>
+                            <input asp-for="Engine" class="form-control" />
+                            <span asp-validation-for="Engine" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Body_Type" class="control-label"></label>
+                            <select asp-for="Body_Type" class="form-control">
+                                <option value="">Choose Body Type</option>
+                                <option value="SUV">SUV</option>
+                                <option value="Sedan">Sedan</option>
+                                <option value="Cabrio">Cabrio</option>
+                                <option value="Coupe">Coupe</option>
+                            </select>
+                            <span asp-validation-for="Body_Type" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Start_Production" class="control-label"></label>
+                            <input asp-for="Start_Production" class="form-control" />
+                            <span asp-validation-for="Start_Production" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="End_Production" class="control-label"></label>
+                            <input asp-for="End_Production" class="form-control" />
+                            <span asp-validation-for="End_Production" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Sets" class="control-label"></label>
+                            <input asp-for="Sets" class="form-control" />
+                            <span asp-validation-for="Sets" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Doors" class="control-label"></label>
+                            <input asp-for="Doors" class="form-control" />
+                            <span asp-validation-for="Doors" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Photo" class="control-label"></label>
+                            <div class="custom-file">
+                                <input type="file" asp-for="Photo" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                            <span asp-validation-for="Photo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Price" class="control-label"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Fuel_Consumption" class="control-label"></label>
+                            <input asp-for="Fuel_Consumption" class="form-control" />
+                            <span asp-validation-for="Fuel_Consumption" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Fuel_Type" class="control-label"></label>
+                            <input asp-for="Fuel_Type" class="form-control" />
+                            <span asp-validation-for="Fuel_Type" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Acceleration" class="control-label"></label>
+                            <input asp-for="Acceleration" class="form-control" />
+                            <span asp-validation-for="Acceleration" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Max_Speed" class="control-label"></label>
+                            <input asp-for="Max_Speed" class="form-control" />
+                            <span asp-validation-for="Max_Speed" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Power" class="control-label"></label>
+                            <input asp-for="Power" class="form-control" />
+                            <span asp-validation-for="Power" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Torque" class="control-label"></label>
+                            <input asp-for="Torque" class="form-control" />
+                            <span asp-validation-for="Torque" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="submit" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
+                    <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i> Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}
+<!--<div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -39,13 +187,13 @@
                 <label asp-for="End_Production" class="control-label"></label>
                 <input asp-for="End_Production" class="form-control" />
                 <span asp-validation-for="End_Production" class="text-danger"></span>
-            </div>
-           @* <div class="form-group">
-                <label asp-for="Photo" class="control-label"></label>
-                <input asp-for="Photo" class="form-control" />
-                <span asp-validation-for="Photo" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
+            </div>-->
+@* <div class="form-group">
+        <label asp-for="Photo" class="control-label"></label>
+        <input asp-for="Photo" class="form-control" />
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>*@
+<!--<div class="form-group">
                 <label asp-for="Sets" class="control-label"></label>
                 <input asp-for="Sets" class="form-control" />
                 <span asp-validation-for="Sets" class="text-danger"></span>
@@ -90,7 +238,7 @@
             </div>
         </form>
     </div>
-</div>
+</div>-->
 
 <div>
     <a asp-action="Index">Back to List</a>
