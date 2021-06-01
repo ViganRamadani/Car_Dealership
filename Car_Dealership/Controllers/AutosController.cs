@@ -11,9 +11,11 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Car_Dealership.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Car_Dealership.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AutosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -28,12 +30,14 @@ namespace Car_Dealership.Controllers
         }
 
         // GET: Autos
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Autos.ToListAsync());
         }
 
         // GET: Autos/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -57,45 +61,7 @@ namespace Car_Dealership.Controllers
             return View();
         }
 
-        // POST: Autos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /* [HttpPost]
-         [ValidateAntiForgeryToken]
-
-         public async Task<IActionResult> CreatePost(CreateAutoViewModel model)
-         {
-             if (ModelState.IsValid)
-             {
-                 string uniqueFileName = null;
-
-
-                 if (model.Photo != null)
-                 {
-                     string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "postphotos");
-
-                     uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                     FileStream fileStream = new FileStream(filePath, FileMode.Create);
-                     model.Photo.CopyTo(fileStream);
-                     fileStream.Close();
-
-                 }
-                 var user = await _userManager.GetUserAsync(User);
-                 Auto autos = new Auto
-                 {
-                     Brand = model.Title,
-                     Photo = uniqueFileName,
-                 };
-
-
-                 _context.Autos.Add(autos);
-                 _context.SaveChanges();
-                 return RedirectToAction("Index", "Home");
-             }
-
-             return View();
-         }*/
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateAutoViewModel model)
@@ -129,36 +95,7 @@ namespace Car_Dealership.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View();
-            /* if (ModelState.IsValid)
-             {
-                 string uniqueFileName = null;
-
-
-                 if (model.Photo != null)
-                 {
-                     string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "postphotos");
-
-                     uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                     FileStream fileStream = new FileStream(filePath, FileMode.Create);
-                     model.Photo.CopyTo(fileStream);
-                     fileStream.Close();
-
-                 }
-                 var user = await _userManager.GetUserAsync(User);
-                 Auto autos = new Auto
-                 {
-                     Brand = model.Brand,
-                     Photo = uniqueFileName,
-                 };
-
-
-                 var autoList = _context.Autos.Add(autos);
-                 _context.Add(autoList);
-                 await _context.SaveChangesAsync();
-                 return RedirectToAction(nameof(Index));
-             }
-             return View(auto);*/
+            
         }
         private string UploadedFile(CreateAutoViewModel model)
         {
