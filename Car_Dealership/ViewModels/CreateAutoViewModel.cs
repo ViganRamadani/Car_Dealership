@@ -39,6 +39,7 @@ namespace Car_Dealership.ViewModels
         public double Power { get; set; }
 
         public double Torque { get; set; }
+        public bool IsDogan { get; set; }
 
     }
 }
