@@ -23,6 +23,12 @@
             @Html.DisplayFor(model => model.Brand)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Auto_Production_Year)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Auto_Production_Year)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Engine)
         </dt>
         <dd class="col-sm-10">
@@ -109,3 +115,9 @@
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+@{       if (Model.IsDogan)
+    {
+        string currentYear = DateTime.Now.Year.ToString(); ;
+        @*int Age = Model.;*@
+    }
+}
