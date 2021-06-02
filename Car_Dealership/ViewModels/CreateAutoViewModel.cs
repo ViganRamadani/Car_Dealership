@@ -21,12 +21,12 @@ namespace Car_Dealership.ViewModels
         [Display(Name = "Profile Picture")]
         public IFormFile Photo { get; set; }
         public string Engine { get; set; }
-       
+
         [DataType(DataType.DateTime)]
         public DateTime Start_Production { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime End_Production { get; set; }
-        
+
         [Required]
         public int Sets { get; set; }
         [Required]

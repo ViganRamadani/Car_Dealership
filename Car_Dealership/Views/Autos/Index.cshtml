@@ -12,27 +12,36 @@
 </p>
 @foreach (var auto in Model)
 {
-    <div id="app" class="row">
-        <div class="left-side col">  <img src="~/img/@auto.Photo" asp-append-version="true" /></div>
-        <div class="right-side col">
-            <h6>@auto.Brand</h6>
-            <ul>
-                <li><p>Engine: @auto.Engine</p></li>
-                <li><p>Body Type: @auto.Body_Type</p></li>
-                <li><p>Year of Production: @auto.Auto_Production_Year</p></li>
+<div id="app" class="row">
+    <div class="left-side col">  <img src="~/img/@auto.Photo" asp-append-version="true" /></div>
+    @*<div id=Galery style="overflow-x:auto;">
+        <table>
+            <tr>
+                <td><a href="#" target="_blank"> <img src="~/img/@auto.Photo" asp-append-version="true" /></a></td>
+            </tr>
+        </table>
+    </div>*@
+    <div class="right-side col">
+        <h3>@auto.Brand</h3>
+        <ul class="list-group">
+            <li class="list-group-item"><p>Engine: @auto.Engine</p></li>
+            <li class="list-group-item"><p>Body Type: @auto.Body_Type</p></li>
+            <li class="list-group-item"><p>Year of Production: @auto.Auto_Production_Year</p></li>
+            <li class="list-group-item"><p>Price: @auto.Price € </p></li>
+            <li class="list-group-item"><p>Doganuar: @auto.IsDogan  </p></li>
+            <li class="list-group-item"><p>Fuel Consumption: @auto.Fuel_Consumption l/100km </p></li>
+            <li class="list-group-item"><p>Power: @auto.Power HP </p></li>
+            <li>
+                <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
+                <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a>
+                <a class="btn btn-primary btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
+            </li>
 
-                <li><p>Price: @auto.Price € </p></li>
-                <li>
-                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
-                    <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a>
-                    <a class="btn btn-primary btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
-                </li>
-
-            </ul>
-
-        </div>
+        </ul>
 
     </div>
+
+</div>
 <br />
 }
 
@@ -40,6 +49,12 @@
 <style>
     * {
         box-sizing: border-box;
+    }
+    div#Galery{
+        height:450px;
+    }
+    div#Galery img{
+        height: 450px;
     }
     #app {
         background-color: lightgray;
