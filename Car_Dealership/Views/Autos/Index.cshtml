@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Car_Dealership.Models.Auto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@foreach (var auto in Model)
+{
+    <div id="app" class="row">
+        <div class="left-side col">  <img src="~/img/@auto.Photo" asp-append-version="true" /></div>
+        <div class="right-side col">
+            <h6>@auto.Brand</h6>
+            <ul>
+                <li><p>Engine: @auto.Engine</p></li>
+                <li><p>Body Type: @auto.Body_Type</p></li>
+                <li><p>Year of Production: @auto.Auto_Production_Year</p></li>
+
+                <li><p>Price: @auto.Price € </p></li>
+                <li>
+                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
+                    <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a>
+                    <a class="btn btn-primary btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+<br />
+}
+
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    #app {
+        background-color: lightgray;
+        border-radius: 40px;
+     
+    }
+    .left-side img {
+        width: 450px;
+        margin:3% 0 0 9%;  
+    }
+    .left-side{
+        background-color:black;
+    }
+   .right-side {
+    float: right;
+    }
+
+    .right-side p {
+        min-width: 150px;
+    }
+
+    @@media screen and (max-width: 1213px) {
+     .right-side {
+       float: right;
+        }
+    }
+
+                @@media screen and (max-width: 770px) {
+                    .left-side {
+                        margin: 0 auto;
+                    }
+
+                    .right-side {
+                        text-align: center;
+                    }
+                }
+
+                @@media screen and (max-width: 365px) {
+                    .left-side img {
+                        width: 250px;
+                        margin: 0 auto;
+                        min-width: 200px;
+                    }
+                }
+            </style>
+            <!--<table class="table">
+                <thead>
+                    <tr>
+                        @* <th>@Html.DisplayNameFor(model => model.Photo)</th>*@
+                @*<th>@Html.DisplayNameFor(model => model.Brand)</th>*@
+                <th>
+                    @*Html.DisplayNameFor(model => model.Engine)</th>
+                    <th>@Html.DisplayNameFor(model => model.Body_Type)</th>
+                    <th>@Html.DisplayNameFor(model => model.Start_Production)</th>
+                    <th>@Html.DisplayNameFor(model => model.End_Production)</th>
+                    <th>@Html.DisplayNameFor(model => model.Price)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @*  @foreach (var auto in Model)
+                    {*@
+                <tr>
+                    @* <td>
+            <img src="~/img/@auto.Photo" class="" height="80" width="80" asp-append-version="true" /></td>*@
+                    @*<td>
+                @auto.Brand
+            </td>*@
+                    <td>
+                        @*auto.Engine</td>
+                    <td>@auto.Body_Type</td>
+                    <td>@auto.Start_Production</td>
+                    <td>@auto.End_Production</td>
+                    <td>@auto.Price</td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@*auto.Id">Edit</a>
+                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@auto.Id">Details</a>
+                        <a class="btn btn-primary" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
+                    </td>
+                </tr>
+
+                @* }*@
+                    </tbody>
+                    </table>-->

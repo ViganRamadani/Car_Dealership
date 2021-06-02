@@ -4,14 +4,16 @@ using Car_Dealership.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Car_Dealership.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210531122654_AutoUpdate2")]
+    partial class AutoUpdate2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +31,6 @@ namespace Car_Dealership.Data.Migrations
                     b.Property<double>("Acceleration")
                         .HasColumnType("float");
 
-                    b.Property<int>("Auto_Production_Year")
-                        .HasColumnType("int");
-
                     b.Property<string>("Body_Type")
                         .HasColumnType("nvarchar(max)");
 
@@ -48,17 +47,11 @@ namespace Car_Dealership.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EngineSize")
-                        .HasColumnType("int");
-
                     b.Property<double>("Fuel_Consumption")
                         .HasColumnType("float");
 
                     b.Property<string>("Fuel_Type")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDogan")
-                        .HasColumnType("bit");
 
                     b.Property<double>("Max_Speed")
                         .HasColumnType("float");

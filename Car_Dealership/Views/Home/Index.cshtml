@@ -4,6 +4,7 @@
 }
 
 
+
 <div class="home-background">
     <div class="home-title">
         <h1 class="display-4">Welcome</h1>
@@ -112,6 +113,12 @@
 
 
 </div>
+
+<div id="result"></div>
+<button type="button" class="btn btn-primary btn-block" id="allNews" onclick="ajaxGet()">click to view all news.</button>
+
+<div id="contain"></div>
+
 <script type='text/javascript'>
 
 
@@ -130,7 +137,7 @@
                        console.log( result[key].image);
                     });
                     $.each(result, function (index, obj) {
-                        var tr = $("<div class="left - side col" ></div>");
+                        var tr = $("<div></div>");
 
 
                         tr.append("<p>" + obj.title + "</p>");
@@ -189,6 +196,7 @@
     @@media screen and (max-width: 770px) {
         .left-side {
             margin: 0 auto;
+
         }
 
         .right-side {
@@ -213,6 +221,7 @@
              <h6>Card @num</h6>
             </vue-card>
         }
+
     </div>*@
 
 
@@ -221,4 +230,6 @@
     #app {
         background-color: lightgray;
     }
+
 </style>
+

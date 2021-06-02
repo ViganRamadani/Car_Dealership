@@ -4,14 +4,16 @@ using Car_Dealership.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Car_Dealership.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210530210518_autos")]
+    partial class autos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,16 +28,15 @@ namespace Car_Dealership.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("Acceleration")
-                        .HasColumnType("float");
-
-                    b.Property<int>("Auto_Production_Year")
+                    b.Property<int>("Acceleration")
                         .HasColumnType("int");
 
                     b.Property<string>("Body_Type")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Brand")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Doors")
@@ -48,31 +49,22 @@ namespace Car_Dealership.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EngineSize")
+                    b.Property<int>("Fuel_Consumption")
                         .HasColumnType("int");
 
-                    b.Property<double>("Fuel_Consumption")
-                        .HasColumnType("float");
+                    b.Property<int>("Fuel_Type")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Fuel_Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDogan")
-                        .HasColumnType("bit");
-
-                    b.Property<double>("Max_Speed")
-                        .HasColumnType("float");
+                    b.Property<int>("Max_Speed")
+                        .HasColumnType("int");
 
                     b.Property<string>("Photo")
                         .IsRequired()
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<double>("Power")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<int>("Power")
+                        .HasColumnType("int");
 
                     b.Property<int>("Sets")
                         .HasColumnType("int");
@@ -80,8 +72,8 @@ namespace Car_Dealership.Data.Migrations
                     b.Property<DateTime>("Start_Production")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Torque")
-                        .HasColumnType("float");
+                    b.Property<int>("Torque")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

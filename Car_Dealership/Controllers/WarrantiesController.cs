@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Car_Dealership.Data;
 using Car_Dealership.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Car_Dealership.Controllers
 {
+    
+    /*[Authorize(Roles = "Admin")]*/
     public class WarrantiesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,12 +23,14 @@ namespace Car_Dealership.Controllers
         }
 
         // GET: Warranties
+        /*[AllowAnonymous]*/
         public async Task<IActionResult> Index()
         {
             return View(await _context.Warranties.ToListAsync());
         }
 
         // GET: Warranties/Details/5
+        /*[AllowAnonymous]*/
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
