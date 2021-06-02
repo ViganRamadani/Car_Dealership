@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Car_Dealership.Controllers
 {
-   /* [Authorize(Roles = "Admin")]*/
+    [Authorize(Roles = "Admin")]
     public class AutosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -30,14 +30,14 @@ namespace Car_Dealership.Controllers
         }
 
         // GET: Autos
-        /*[AllowAnonymous]*/
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Autos.ToListAsync());
         }
 
         // GET: Autos/Details/5
-        /*[AllowAnonymous]*/
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -61,7 +61,6 @@ namespace Car_Dealership.Controllers
             return View();
         }
 
-      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateAutoViewModel model)
@@ -98,7 +97,7 @@ namespace Car_Dealership.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View();
-            
+
         }
         private string UploadedFile(CreateAutoViewModel model)
         {
@@ -116,6 +115,8 @@ namespace Car_Dealership.Controllers
             }
             return uniqueFileName;
         }
+
+
 
 
         // GET: Autos/Edit/5
@@ -139,7 +140,7 @@ namespace Car_Dealership.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Brand,Engine,Body_Type,Start_Production,End_Production,Photo,Sets,Doors,Fuel_Consumption,Fuel_Type,Acceleration,Max_Speed,Power,Torque,Price,IsDogan,Auto_Production_Year,EngineSize")] Auto auto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Brand,Engine,Body_Type,Start_Production,End_Production,Photo,Sets,Doors,Fuel_Consumption,Fuel_Type,Acceleration,Max_Speed,Power,Torque,Price,IsDogan")] Auto auto)
         {
             if (id != auto.Id)
             {
@@ -148,7 +149,7 @@ namespace Car_Dealership.Controllers
 
             if (ModelState.IsValid)
             {
-                try 
+                try
                 {
                     _context.Update(auto);
                     await _context.SaveChangesAsync();

@@ -24,6 +24,7 @@ namespace Car_Dealership.Models
         [Required]
         [MaxLength(256)]
         public string Photo { get; set; }
+     
         [Required]
         
         public int Sets { get; set; }
