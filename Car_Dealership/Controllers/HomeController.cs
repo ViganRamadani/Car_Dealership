@@ -26,6 +26,10 @@ namespace Car_Dealership.Controllers
         {
             return View();
         }
+        public IActionResult Privacy()
+        {
+            return View();
+        }
         public IActionResult allNews()
         {
             return View();
