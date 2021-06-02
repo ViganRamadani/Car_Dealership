@@ -3,40 +3,121 @@
     ViewData["Title"] = "Home Page";
 }
 
-<br />
-<h1 style="text-align:center">NEWS</h1>
-<br />
+
+
+<div class="home-background">
+    <div class="home-title">
+        <h1 class="display-4">Welcome</h1>
+        <p>The right place to find the right car</p>
+    </div>
+</div>
+
+
+
+
+<div class="container">
+
+
+    <br />
+    <h1 class="mt-4" style="text-align:center">LATEST CARS</h1>
+    <br />
+
+    @for (int i = 0; i < 1; i++)
+    {
+        <div class="row mt-2">
+            <div class="col-md-4">
+                <div class="card latest-cars">
+                    <img class="card-img-top" src="/img/Gclass.jpg">
+                    <div class="card-body">
+                        <h5 class="card-title">G-Class</h5>
+                        <p class="card-text">$60.000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card latest-cars">
+                    <img class="card-img-top" src="/img/audi.jpg">
+                    <div class="card-body">
+                        <h5 class="card-title">AUDI SQ8 4.0 TFSI QUATTRO</h5>
+                        <p class="card-text">$50.000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card latest-cars">
+                    <img class="card-img-top" src="/img/mercedes.jpg">
+                    <div class="card-body">
+                        <h5 class="card-title">S 400 D LONG 4MATIC AMG-LINE</h5>
+                        <p class="card-text">$35.000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+
+ 
+        <div class="container">
+            <div class="d-flex flex-row justify-content-center justify-content-around brands-logo">
+                <div class="logo-box">
+                    <img src="~/img/mercedes.png" alt="Mercedes-Benz">
+                </div>
+                <div class="logo-box">
+                    <img src="img/bmw.png" alt="BMW">
+                </div>
+                <div class="logo-box">
+                    <img src="img/audi.png" alt="Audi">
+                </div>
+                <div class="logo-box">
+                    <img src="img/lambo.png" alt="Lamborghini">
+                </div>
+                <div class="logo-box">
+                    <img src="img/volkswagen.png" alt="Volkswagen">
+                </div>
+                <div class="logo-box">
+                    <img src="img/porsche.jpg" alt="Porsche">
+                </div>
+            </div>
+        </div>
+ 
+
+
+
+    
+
+        <div class="containter">
+            <h1 class="our-services" style="text-align:center">OUR SERVICES</h1>
+            <div class="d-flex flex-row justify-content-center justify-content-around">
+                <div class="col-md-4 text-center mb-5">
+                    <i class="fas fa-tools fa-5x mt-3 mb-3"></i>
+                    <h4>Repair</h4>
+
+                </div>
+                <div class="col-md-4 text-center">
+
+                    <i class="fas fa-truck-loading fa-5x mt-3 mb-3"></i>
+                    <h4>Car Transport</h4>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-truck-loading fa-5x mt-3 mb-3"></i>
+                    <h4>Replacement Part</h4>
+
+                </div>
+            </div>
+        </div>
+
+
+
+</div>
 
 <div id="result"></div>
 <button type="button" class="btn btn-primary btn-block" id="allNews" onclick="ajaxGet()">click to view all news.</button>
-@*<div id="title"></div>
-    <div id="description"></div>
-    <div id="img_path"></div>*@
+
 <div id="contain"></div>
-
-@for (int i = 0; i < 4; i++)
-{
-    <div id="app" class="row">
-        <div class="left-side col"> <img src="~/img/Gclass.jpg" /></div>
-        <div class="right-side col">
-            <h6> Card Vue Component</h6>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        </div>
-
-    </div>
-    <br />
-}
-<script type='text/javascript'></script>
-
-@section Scripts{
-    <script type='text/javascript' src='https://code.jquery.com/jquery-3.5.0.js'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-}
-
-
-
-
 
 <script type='text/javascript'>
 
@@ -115,6 +196,7 @@
     @@media screen and (max-width: 770px) {
         .left-side {
             margin: 0 auto;
+
         }
 
         .right-side {
@@ -139,6 +221,7 @@
              <h6>Card @num</h6>
             </vue-card>
         }
+
     </div>*@
 
 
@@ -147,4 +230,6 @@
     #app {
         background-color: lightgray;
     }
+
 </style>
+
