@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Car_Dealership.Controllers
 {
     
-    [Authorize(Roles = "Admin")]
+    /*[Authorize(Roles = "Admin")]*/
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -20,7 +20,7 @@ namespace Car_Dealership.Controllers
         {
             _logger = logger;
         }
-        [AllowAnonymous]
+        /*[AllowAnonymous]*/
         public IActionResult Index()
         {
             return View();

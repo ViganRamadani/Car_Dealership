@@ -12,6 +12,8 @@ namespace Car_Dealership.ViewModels
         [Required]
         [MaxLength(100)]
         public string Brand { get; set; }
+        public int Auto_Production_Year { get; set; }
+        public int EngineSize { get; set; }
         public string Body_Type { get; set; }
         [Required]
         public double Price { get; set; }

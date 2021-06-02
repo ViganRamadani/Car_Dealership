@@ -12,9 +12,10 @@ namespace Car_Dealership.Models
         [Required]
         public double Price { get; set; }
         public string Brand { get; set; }
+        public int Auto_Production_Year { get; set; }
         [Required]
         public string Engine { get; set; }
-       
+        public int EngineSize { get; set; }
         public string Body_Type { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime Start_Production { get; set; }
