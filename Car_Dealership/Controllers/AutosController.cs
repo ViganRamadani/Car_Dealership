@@ -86,7 +86,8 @@ namespace Car_Dealership.Controllers
                     Acceleration = model.Acceleration,
                     Max_Speed = model.Max_Speed,
                     Power = model.Power,
-                    Torque = model.Torque
+                    Torque = model.Torque,
+                    IsDogan = model.IsDogan
 
 
                 };
@@ -136,7 +137,7 @@ namespace Car_Dealership.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Brand,Engine,Body_Type,Start_Production,End_Production,Photo,Sets,Doors,Fuel_Consumption,Fuel_Type,Acceleration,Max_Speed,Power,Torque,Price")] Auto auto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Brand,Engine,Body_Type,Start_Production,End_Production,Photo,Sets,Doors,Fuel_Consumption,Fuel_Type,Acceleration,Max_Speed,Power,Torque,Price,IsDogan")] Auto auto)
         {
             if (id != auto.Id)
             {
