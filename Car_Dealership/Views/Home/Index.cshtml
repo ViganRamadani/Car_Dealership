@@ -1,8 +1,7 @@
-﻿@model Car_Dealership.Models.News
+@model Car_Dealership.Models.News
 @{
     ViewData["Title"] = "Home Page";
 }
-
 <div class="home-background">
     <div class="container">
         <div class="banner-info-bg">
@@ -14,12 +13,14 @@
     </div>
 </div>
 
+
 <div class="w3l-bottom-grids">
     <div class="container-fluid px-0">
         <div class="bottomhny-grids-sec">
             <div class="bottomhny-1">
                 <div class="bottomhny-gd-ingf">
                     <h4>Satisfaction Guaranteed or Your Dent Back.</h4>
+
                 </div>
             </div>
             <div class="bottomhny-1 bottomhny-2">
@@ -62,10 +63,19 @@
                 </div>
             </div>
         </div>
+
         </div>
 </section>
 
+    }
 
+    <div id="result"></div>
+    <button type="button" class="btn btn-primary btn-block" id="allNews" onclick="ajaxGet()">click to view all news.</button>
+
+
+    <div id="contain">
+
+        <div id="reportWindow">
 
 <section class="features-4">
     <div class="features4-block py-5">
@@ -381,17 +391,10 @@
 
 
 
-<div id="result"></div>
-<button type="button" class="btn btn-primary btn-block" id="allNews" onclick="ajaxGet()">click to view all news.</button>
 
-<div id="contain"></div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <script type='text/javascript'>
-
-
-
-    // DO GET
-
     function ajaxGet() {
 
         $.ajax({
@@ -399,46 +402,104 @@
             url: "http://localhost:3000/user/allNews",
             success: function (result) {
 
+
                 $.each(result, function (key, value) {
-                    /**/
-@*  alert("Title: " + result[key].title + "; Description: " + result[key].description + ";");*@
-    /**/
-    console.log(result[key].image);
-});
-$.each(result, function (index, obj) {
-    var tr = $("<div></div>");
+                    @* alert("Title: " + result[key].title + "; Description: " + result[key].description + ";");*@
+                    console.log(result[key].image);
+                });
+                $.each(result, function (index, obj) {
+                    var tr = $("<div></div>");
 
+                    tr.append("<p>" + obj.title + "</p>");
+                    tr.append("<p>" + obj.description + "</p>");
+                    tr.append("<p>" + obj.img_path + "</p>");
+                    tr.append("<p>" + obj.createdAt + "</p><hr>");
+                    tr.append("<button value=" + obj._id + " onclick=showReportWindow(this)>Report</button><hr>");
 
-    tr.append("<p>" + obj.title + "</p>");
-    tr.append("<p>" + obj.description + "</p>");
-    tr.append("<p>" + obj.img_path + "</p>");
-    tr.append("<p>" + obj.createdAt + "</p><hr>");
-
-
-    $("#contain").append(tr);
-});
-/**/
-@*if (results.length > 0) {
+                    $("#contain").append(tr);
+                });
+                @*if (results.length > 0) {
                     $('#title').text(result[0].title);
                     $('#description').text(result[0].description);
-                        $('#img_path').text(result[0].img_path);
-                    }
-                    else {
-                        alert("No data.");
-                    }*@
-    /**/
-    console.log("Success: ", result);
-},
-error: function (e) {
-    $("#getResultDiv").html("Error");
-    console.log("ERROR: ", e);
-}
+                    $('#img_path').text(result[0].img_path);
+                }
+                else {
+                    alert("No data.");
+                }*@
+                console.log("Success: ", result);
+            },
+            error: function (e) {
+                $("#getResultDiv").html("Error");
+                console.log("ERROR: ", e);
+            }
+        });
+    }
 
-});
+    function showReportWindow(data) {
+        var id = $(data).val();
+        var element = $("<form method='POST' class='d-flex flex-column'></form>");
 
-}
+
+        element.append("<h4>" + id + "</h4>");
+        //element.append("<input placeholder='Report Reason'></input>");
+
+        var select = $("<select class='mb-3 mt-3'></select>")
 
 
+        select.append("<option>test</option>")
+        select.append("<option>test</option>")
+        select.append("<option>test</option>")
+        select.append("<option>test</option>")
+        select.append("<option>test</option>")
+        element.append(select)
+        element.append("<button type='button' value=" + id +" class='btn btn-danger' onclick='reportNews(this);'>Create Report</input>");
+
+        $("#reportWindow").append(element);
+
+        $("#reportWindow").css({ "opacity": "100%", "pointer-events": "all", "z-index": 1});
+
+        //opacity: 0;
+        //pointer - events: none;
+        //z - index: 0;
+    }
+
+    function reportNews(data) {
+        var id = $(data).val();
+        var select = $("select :selected").val();
+        console.log(id, select);
+        var obj = {
+            newsId: id,
+            reportReason: select
+        }
+      $.ajax({
+          type: "POST",
+          url: 'http://localhost:3000/user/report_news/' + id,
+          data: obj,
+          dataType: "json",
+            encode: true,
+            success: function (result) {
+                console.log(result);
+                //location.reload(true);
+                $("#reportWindow").css({ "opacity": "0", "pointer-events": "none", "z-index": -1 });
+                $('form').remove();
+            }
+      });
+
+
+    }
+
+    function removenews(data) {
+        var id = $(data).val();
+        console.log(id);
+        $.ajax({
+            type: "DELETE",
+            url: 'http://localhost:3000/user/remove_news/' + id,
+            success: function (result) {
+                console.log(result);
+                location.reload(true);
+            }
+        });
+    }
 </script>
 
 <style>
@@ -457,6 +518,19 @@ error: function (e) {
         .right-side p {
             min-width: 150px;
         }
+
+    #reportWindow {
+        position: absolute;
+        background: white;
+        display: flex;
+        align-items: center;
+        width: 75%;
+        height: 350px;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 0;
+        transition: opacity 0.2s;
+    }
 
     @@media screen and (max-width: 1213px) {
         .right-side {
@@ -481,22 +555,7 @@ error: function (e) {
             min-width: 200px;
         }
     }
-</style>
-@*<div id="app" class="card-deck pt-4">
-        @for (var num = 1; num <= 4; num++)
-        {
-            var Card = $"Card_{num}";
 
-            <vue-card id="@Card" name="@Card" img="https://vuejs.org/images/logo.png" class="mb-6">
-             <h6>Card @num</h6>
-            </vue-card>
-        }
-
-    </div>*@
-
-
-
-<style>
     #app {
         background-color: lightgray;
     }

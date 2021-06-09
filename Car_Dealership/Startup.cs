@@ -1,4 +1,5 @@
 using Car_Dealership.Data;
+using Car_Dealership.Hubs;
 using Car_Dealership.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,7 @@ namespace Car_Dealership
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddSignalR();
             services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
@@ -49,6 +51,7 @@ namespace Car_Dealership
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+   
         }
 /*services.AddDefaultIdentity<PortalUser>()
     .AddRoles<IdentityRole>()
@@ -68,17 +71,19 @@ namespace Car_Dealership
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSignalR(route =>
+            {
+                route.MapHub<ChatHub>("/Home/Index");
+            });
 
-            
-                app.UseEndpoints(endpoints => {
+            app.UseEndpoints(endpoints => {
                     endpoints.MapControllerRoute(
                     name: "MyAdmin",
-                    pattern: "{area:exists}/{controller=Admin}/{action=ListRoles}/{id?}");
+                    pattern: "{area:exists}/{controller=Admin}/{action=ListUsers}/{id?}");
                 });
 
             app.UseEndpoints(endpoints =>

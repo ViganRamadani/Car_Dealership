@@ -1,86 +1,127 @@
-﻿@model IEnumerable<Car_Dealership.Models.Auto>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> _signInManager;
+
+@model IEnumerable<Car_Dealership.Models.Auto>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+    <a class="btn btn-primary text-center d-block mx-auto" style="width:60%;" asp-action="Create">Create New</a>
+    <div class="row">
+        @foreach (var auto in Model)
+        {
+        <div class="col-sm-4">
+            <div id="app" class="card mb-3">
+                <a asp-action="Details" asp-route-id="@auto.Id"><img src="~/img/@auto.Photo" asp-append-version="true" class="card-img-top" /></a>
+                <div class="card-body">
+                    <p class="card-text">
+                        <h3 class="text-muted">@auto.Price Euro</h3>
+                    </p>
+                    <ul class="" >
+                       @* <li class="text-decoration-none">Body Type: @auto.Body_Type</li>
+                        <li>Engine: @auto.Engine</li>
+                        <li>Year of Production: @auto.Auto_Production_Year</li>
+                        <li>Doganuar: @auto.IsDogan</li>
+                        <li>Power: @auto.Power HP </li>*@
+                        <div>
+                            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                              
+                            <li>
+                                <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
+                            </li>
+                            <li>
+                                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
+                            </li>
+                        }
+                            <li><a class="btn btn-secondary btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a></li>
+                    </div>
+                    </ul>
+                    @*<table style="text-align:center;width:100%">
+                <tr>
+                    <td><p>Engine: @auto.Engine</p></td>
+                    <td><p>Body Type: @auto.Body_Type</p></td>
+                    <td><p>Year of Production: @auto.Auto_Production_Year</p></td>
+                </tr>
+                <tr>
+                    <td><p>Doganuar: @auto.IsDogan  </p></td>
+                    <td><p>Fuel Consumption: @auto.Fuel_Consumption l/100km </p></td>
+                    <td><p>Power: @auto.Power HP </p></td>
+                </tr>
+                <tr>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-@foreach (var auto in Model)
-{
-<div id="app" class="row">
-    <div class="left-side col">  <img src="~/img/@auto.Photo" asp-append-version="true" /></div>
-    @*<div id=Galery style="overflow-x:auto;">
-        <table>
-            <tr>
-                <td><a href="#" target="_blank"> <img src="~/img/@auto.Photo" asp-append-version="true" /></a></td>
-            </tr>
-        </table>
-    </div>*@
-    <div class="right-side col">
-        <h3>@auto.Brand</h3>
-        <ul class="list-group">
-            <li class="list-group-item"><p>Engine: @auto.Engine</p></li>
-            <li class="list-group-item"><p>Body Type: @auto.Body_Type</p></li>
-            <li class="list-group-item"><p>Year of Production: @auto.Auto_Production_Year</p></li>
-            <li class="list-group-item"><p>Price: @auto.Price € </p></li>
-            <li class="list-group-item"><p>Doganuar: @auto.IsDogan  </p></li>
-            <li class="list-group-item"><p>Fuel Consumption: @auto.Fuel_Consumption l/100km </p></li>
-            <li class="list-group-item"><p>Power: @auto.Power HP </p></li>
-            <li>
-                <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
-                <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a>
-                <a class="btn btn-primary btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
-            </li>
+                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <td>
+                            <a class="btn btn-light btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-light btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
+                        </td>
+                    }
+                    <td><a class="btn btn-light btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a></td>
 
-        </ul>
+                </tr>
+            </table>*@
 
+                </div>
+            </div>
+        </div>
+        }
     </div>
 
-</div>
-<br />
-}
+        
+        
+        <style>
+            #app {
+                width: 60%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
 
+        @*<style>
+                * {
+                    box-sizing: border-box;
+                }
 
-<style>
-    * {
-        box-sizing: border-box;
-    }
-    div#Galery{
-        height:450px;
-    }
-    div#Galery img{
-        height: 450px;
-    }
-    #app {
-        background-color: lightgray;
-        border-radius: 40px;
-     
-    }
-    .left-side img {
-        width: 450px;
-        margin:3% 0 0 9%;  
-    }
-    .left-side{
-        background-color:black;
-    }
-   .right-side {
-    float: right;
-    }
+                div#Galery {
+                    height: 450px;
+                }
 
-    .right-side p {
-        min-width: 150px;
-    }
+                    div#Galery img {
+                        height: 450px;
+                    }
 
-    @@media screen and (max-width: 1213px) {
-     .right-side {
-       float: right;
-        }
-    }
+                #app {
+                    background-color: lightgray;
+                    border-radius: 40px;
+                }
+
+                .left-side img {
+                    width: 450px;
+                    margin: 3% 0 0 9%;
+                }
+
+                .left-side {
+                    background-color: black;
+                }
+
+                .right-side {
+                    float: right;
+                }
+
+                    .right-side p {
+                        min-width: 150px;
+                    }
+
+                @@media screen and (max-width: 1213px) {
+                    .right-side {
+                        float: right;
+                    }
+                }
 
                 @@media screen and (max-width: 770px) {
                     .left-side {
@@ -99,42 +140,42 @@
                         min-width: 200px;
                     }
                 }
-            </style>
-            <!--<table class="table">
-                <thead>
-                    <tr>
-                        @* <th>@Html.DisplayNameFor(model => model.Photo)</th>*@
-                @*<th>@Html.DisplayNameFor(model => model.Brand)</th>*@
-                <th>
-                    @*Html.DisplayNameFor(model => model.Engine)</th>
-                    <th>@Html.DisplayNameFor(model => model.Body_Type)</th>
-                    <th>@Html.DisplayNameFor(model => model.Start_Production)</th>
-                    <th>@Html.DisplayNameFor(model => model.End_Production)</th>
-                    <th>@Html.DisplayNameFor(model => model.Price)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @*  @foreach (var auto in Model)
-                    {*@
+            </style>*@
+        <!--<table class="table">
+            <thead>
                 <tr>
-                    @* <td>
-            <img src="~/img/@auto.Photo" class="" height="80" width="80" asp-append-version="true" /></td>*@
-                    @*<td>
-                @auto.Brand
-            </td>*@
-                    <td>
-                        @*auto.Engine</td>
-                    <td>@auto.Body_Type</td>
-                    <td>@auto.Start_Production</td>
-                    <td>@auto.End_Production</td>
-                    <td>@auto.Price</td>
-                    <td>
-                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@*auto.Id">Edit</a>
-                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@auto.Id">Details</a>
-                        <a class="btn btn-primary" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
-                    </td>
-                </tr>
+                    @* <th>@Html.DisplayNameFor(model => model.Photo)</th>*@
+            @*<th>@Html.DisplayNameFor(model => model.Brand)</th>*@
+            <th>
+                @*Html.DisplayNameFor(model => model.Engine)</th>
+                <th>@Html.DisplayNameFor(model => model.Body_Type)</th>
+                <th>@Html.DisplayNameFor(model => model.Start_Production)</th>
+                <th>@Html.DisplayNameFor(model => model.End_Production)</th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*  @foreach (var auto in Model)
+                {*@
+            <tr>
+                @* <td>
+        <img src="~/img/@auto.Photo" class="" height="80" width="80" asp-append-version="true" /></td>*@
+                @*<td>
+            @auto.Brand
+        </td>*@
+                <td>
+                    @*auto.Engine</td>
+                <td>@auto.Body_Type</td>
+                <td>@auto.Start_Production</td>
+                <td>@auto.End_Production</td>
+                <td>@auto.Price</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@*auto.Id">Edit</a>
+                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@auto.Id">Details</a>
+                    <a class="btn btn-primary" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
+                </td>
+            </tr>
 
-                @* }*@
-                    </tbody>
-                    </table>-->
+            @* }*@
+                </tbody>
+                </table>-->

@@ -1,10 +1,6 @@
 ﻿using Car_Dealership.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Car_Dealership.Models;
 
 namespace Car_Dealership.Data
 {
@@ -16,7 +12,16 @@ namespace Car_Dealership.Data
         {
         }
         public DbSet<Car_Dealership.Models.News> News { get; set; }
-        
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<Message>()
+                .HasOne<AppUser>(a => a.Sender)
+                .WithMany(d => d.Messages)
+                .HasForeignKey(d => d.UserID);
+        }
+
+        public DbSet<Message> Messages { get; set; }
         public DbSet<Auto> Autos { get; set; }
         public DbSet<Post> Posts { get; set; }
        
