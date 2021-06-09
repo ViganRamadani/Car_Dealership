@@ -1,18 +1,23 @@
 ﻿@using Microsoft.AspNetCore.Identity;
-    @model IEnumerable<IdentityRole>
+@model IEnumerable<IdentityRole>
 
-    @{
-        Layout = "~/Views/Shared/_Layout.cshtml";
-        ViewBag.Title = "All Roles";
-    }
-    <h1>All Roles</h1>
+@{
+    Layout = "~/Views/Shared/Admin.cshtml";
+    ViewBag.Title = "All Roles";
+}
+<h1>All Roles</h1>
 
-    @if (Model.Any())
+<a class="btn btn-primary" asp-action="ListUsers" asp-controller="Admin">Users</a>
+
+@if (Model.Any())
+{
+    <a class="btn btn-primary" asp-action="CreateRole" asp-controller="Admin">Add new role</a>
+
+    @foreach (var role in Model)
     {
-        <a class="btn btn-primary" asp-action="CreateRole" asp-controller="Admin">Add new role</a>
-
-       @foreach(var role in Model)
-        {
+        <div class="card-deck mb-3 text-center">
+         
+           </div>
             <div class="card mb-3">
                 <div class="card-header">RoleId : @role.Id</div>
                 <div class="card-body">@role.Name</div>
@@ -28,36 +33,36 @@
                             <a href="#" class="btn btn-danger" onclick="confirmDelete('@role.Id',true)">Delete</a>
                         </span>
                     </form>
-                   @* <a class="btn btn-primary" asp-action="EditRole" asp-controller="Admin" asp-route-id="@role.Id">Edit</a>
-                    <a href="#">Delete</a>*@
+                    @* <a class="btn btn-primary" asp-action="EditRole" asp-controller="Admin" asp-route-id="@role.Id">Edit</a>
+                        <a href="#">Delete</a>*@
 
                 </div>
             </div>
-        }
-    }
-    else
-    {
-    <div class="card">
-        <div class="card-header">
-            No roles created yet
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Use the buttom below to create role</h5>
-            <a class="btn btn-primary" style="width:auto" asp-area="Admin" asp-controller="Admin" asp-action="CreateRole">Create Role</a>
-            <a asp-area="Admin" asp-controller="AdminController" asp-action="CreateRole">Create Roles</a>
-        </div>
-    </div>
-    }
-<script>
-    function confirmDelete(uniqueId, isDeleteClicked) {
-        var deleteSpan = 'deleteSpan_' + uniqueId;
-        var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
-        if (isDeleteClicked) {
-            $('#' + deleteSpan).hide();
-            $('#' + confirmDeleteSpan).show();
-        } else {
-            $('#' + deleteSpan).show();
-            $('#' + confirmDeleteSpan).hide();
-        }
-    }
-</script>
+            }
+            }
+            else
+            {
+            <div class="card">
+                <div class="card-header">
+                    No roles created yet
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Use the buttom below to create role</h5>
+                    <a class="btn btn-primary" style="width:auto" asp-area="Admin" asp-controller="Admin" asp-action="CreateRole">Create Role</a>
+                    <a asp-area="Admin" asp-controller="AdminController" asp-action="CreateRole">Create Roles</a>
+                </div>
+            </div>
+            }
+            <script>
+                function confirmDelete(uniqueId, isDeleteClicked) {
+                    var deleteSpan = 'deleteSpan_' + uniqueId;
+                    var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+                    if (isDeleteClicked) {
+                        $('#' + deleteSpan).hide();
+                        $('#' + confirmDeleteSpan).show();
+                    } else {
+                        $('#' + deleteSpan).show();
+                        $('#' + confirmDeleteSpan).hide();
+                    }
+                }
+            </script>

@@ -14,10 +14,78 @@
 <div>
     <hr />
     @{var autoImg = @Html.DisplayFor(model => model.Photo); }
-@*<p> @autoImg</p>*@
-        
-    <div class="left-side col">  <img width="580" src="~/img/@autoImg" /></div>
+    @*<p> @autoImg</p>*@
 
+    <div class="left-side col">  <img width="580" src="~/img/@autoImg" /></div>
+    @{ if (!Model.IsDogan)
+        {
+            string currentYear = DateTime.Now.Year.ToString();
+            var currentYearInt = Int16.Parse(currentYear);
+            int Age = currentYearInt - Model.Auto_Production_Year;
+            double Akcize = 0;
+            double TaksaDoganore = 0;
+            double TVSH = 0;
+            double Totali = 0;
+            int EngineSize = Model.EngineSize;
+            double AutoPrice = Model.Price;
+            if (Age < 10)
+            {
+                if (Age == 0 && EngineSize <= 2000)
+                {
+                    Akcize = 0;
+                }
+                else if (Age >= 0 && EngineSize > 2000)
+                {
+                    Akcize = 500;
+                }
+                else if (Age == 8 && EngineSize <= 3000)
+                {
+                    Akcize = 500;
+                }
+                else if (Age == 8 && EngineSize > 3000)
+                {
+                    Akcize = 1000;
+                }
+                else if (Age == 9 && EngineSize <= 3000)
+                {
+                    Akcize = 700;
+                }
+                else if (Age == 9 && EngineSize > 3000)
+                {
+                    Akcize = 1500;
+                }
+                else if (Age == 10 && EngineSize <= 2000)
+                {
+                    Akcize = 800;
+                }
+                else if (Age == 10 && EngineSize > 2000 && EngineSize <= 3000)
+                {
+                    Akcize = 900;
+                }
+                else if (Age == 10 && EngineSize > 3000)
+                {
+                    Akcize = 1800;
+                }
+                else
+                {
+
+                }
+
+                TaksaDoganore = AutoPrice * 0.1;
+                TVSH = (AutoPrice + TaksaDoganore + Akcize) * 0.16;
+                Totali = Akcize + TVSH + TaksaDoganore;
+                <p style="background-color:orange"><b>Totali për zhdoganimin të @Model.Brand është @Totali €.</b></p>
+
+            }
+            else
+            {
+                <p style="background-color:red;color:white;"><b>Nuk ka te drejt doganimi sepse eshte me i vjeter se 10 vite.</b></p>
+            }
+
+
+        }
+
+    }
     <dl class="row">
 
         <dt class="col-sm-2">
@@ -115,72 +183,8 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IsDogan)
+
         </dd>
     </dl>
 </div>
 
-@{       if (!Model.IsDogan)
-    {
-        string currentYear = DateTime.Now.Year.ToString();
-        var currentYearInt = Int16.Parse(currentYear);
-        int Age = currentYearInt - Model.Auto_Production_Year;
-        double Akcize = 0;
-        double TaksaDoganore = 0;
-        double TVSH = 0;
-        double Totali = 0;
-        int EngineSize = Model.EngineSize;
-        double AutoPrice = Model.Price;
-        if (Age < 10 )
-        {
-            if (Age == 0 && EngineSize <= 2000)
-            {
-                Akcize = 0;
-            }
-            else if (Age >= 0 && EngineSize > 2000)
-            {
-                Akcize = 500;
-            }
-            else if (Age == 8 && EngineSize <= 3000)
-            {
-                Akcize = 500;
-            }
-            else if (Age == 8 && EngineSize > 3000)
-            {
-                Akcize = 1000;
-            }
-            else if (Age == 9 && EngineSize <= 3000)
-            {
-                Akcize = 700;
-            }
-            else if (Age == 9 && EngineSize > 3000)
-            {
-                Akcize = 1500;
-            }
-            else if (Age == 10 && EngineSize <= 2000)
-            {
-                Akcize = 800;
-            }
-            else if (Age == 10 && EngineSize > 2000 && EngineSize <= 3000)
-            {
-                Akcize = 900;
-            }
-            else if (Age == 10 && EngineSize > 3000)
-            {
-                Akcize = 1800;
-            }
-            else
-            {
-               
-            }
-
-            TaksaDoganore = AutoPrice * 0.1;
-            TVSH = (AutoPrice + TaksaDoganore + Akcize) * 0.16;
-            Totali = Akcize + TVSH + TaksaDoganore;
-<p><b>Totali për zhdoganimin të @Model.Brand është @Totali €.</b></p>
-
-        }
-
-
-    }
-
-}    

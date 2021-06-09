@@ -1,5 +1,7 @@
-﻿@using Microsoft.AspNetCore.Identity;
-@inject SignInManager<ApplicationUser> _signInManager;
+﻿
+@using Microsoft.AspNetCore.Identity;
+
+@inject SignInManager<ApplicationUser> _signInManager
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +16,8 @@
 <body>
 
     <header>
-               
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-dark  box-shadow mb-3">
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-dark  box-shadow mb-3">
             <div class="container">
                 <img src="~/img/logo.png" class="logo" />
                 <button class="navbar-toggler border-white" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -31,23 +33,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a>
                         </li>
+                        
+                           
+
+                        
+                        
 
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="allNews">Cars</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Autos" asp-action="Index">Cars</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="ApplicationUser" asp-action="Account">Account</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="NewsUpload">Servivces</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="NewsUpload">Contact</a>
-                        </li>
+                        @* <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="NewsUpload">News</a>
+                            </li>*@
+                        @* <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="NewsUpload">Contact</a>
+                            </li>*@
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Autos" asp-action="Index">Cars</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Warranties" asp-action="Index">Warranties</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Warranties" asp-action="Index">Warranties</a>
                         </li>
                         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
@@ -58,43 +65,43 @@
 
                     </ul>
                 </div>
-                </div>
+            </div>
         </nav>
 
-          
+
     </header>
-   
 
 
-   
-
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
 
 
-        <footer>
-            <div class="footer text-white bg-dark">
-                <div class="container">
-                    <div>
-                        <h2>Call: (+383) 44 122-133</h2>
-                    </div>
-                    <div>
-                        <p>Magj. Prishtinë-Ferizaj</p>
-                    </div>
-                    <div>
-                        <p>cardealership@gmail.com</p>
-                    </div>
-                    <div>
-                        <p>Mon-Fri: 9am-6pm | Sat: 9am-1pm</p>
-                    </div>
 
-                    <div class="copyright">
-                        <p><i>Copyright © 2021 CarDealership. All rights reserved</i></p>
-                    </div>
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+
+    <footer>
+        <div class="footer text-white bg-dark">
+            <div class="container">
+                <div>
+                    <h2>Call: (+383) 44 122-133</h2>
+                </div>
+                <div>
+                    <p>Magj. Prishtinë-Ferizaj</p>
+                </div>
+                <div>
+                    <p>cardealership@gmail.com</p>
+                </div>
+                <div>
+                    <p>Mon-Fri: 9am-6pm | Sat: 9am-1pm</p>
+                </div>
+
+                <div class="copyright">
+                    <p><i>Copyright © 2021 CarDealership. All rights reserved</i></p>
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
