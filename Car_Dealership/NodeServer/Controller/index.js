@@ -1,6 +1,7 @@
 ﻿const express = require('express')
 const router = express.Router()
 const News = require('../Model/News');
+const ReportNews = require('../Model/ReportNews')
 const multer = require('multer');
 const crypto = require("crypto");
 var upload = multer({ dest: 'uploads/' }) // Creates a uploads/ Folder
@@ -30,7 +31,7 @@ router.post('/createNews', (req, res) => {
             console.log(err);
         }
         else {
-            // item.save();
+             item.save();
             res.send(req.body)
         }
     });
@@ -44,5 +45,39 @@ router.get('/allNews', (req, res) => {
         }
     })
 })
+router.delete('/remove_news/:id', (req, res) => {
+    var id = req.params.id;
+    console.log(id);
+    News.findByIdAndDelete(id, function (err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(data)
+        }
+    });
+        
+});
 
+router.post('/report_news/:id', async(req, res) => {
+    try {
+        console.log(req.body, req.params)
+        const report = new ReportNews({
+            newsId: req.body.newsId,
+            reportReason: req.body.reportReason
+        })
+
+
+        await report.save();
+        console.log("Report Created!")
+        return res.status(201).json(report)
+
+    } catch (err) {
+        return console.log(err)
+    }
+})
+
+/*app.get('/img', function (req, res) {
+    res.sendFile(__dirname + "/index.html");
+});
+*/
 module.exports = router;

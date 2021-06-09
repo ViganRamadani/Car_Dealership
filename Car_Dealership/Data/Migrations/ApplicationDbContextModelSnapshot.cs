@@ -88,6 +88,34 @@ namespace Car_Dealership.Data.Migrations
                     b.ToTable("Autos");
                 });
 
+            modelBuilder.Entity("Car_Dealership.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("When")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("Car_Dealership.Models.News", b =>
                 {
                     b.Property<string>("Id")
@@ -379,6 +407,13 @@ namespace Car_Dealership.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Car_Dealership.Models.AppUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.HasDiscriminator().HasValue("AppUser");
+                });
+
             modelBuilder.Entity("Car_Dealership.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -396,6 +431,13 @@ namespace Car_Dealership.Data.Migrations
                         .HasColumnType("bit");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("Car_Dealership.Models.Message", b =>
+                {
+                    b.HasOne("Car_Dealership.Models.AppUser", "Sender")
+                        .WithMany("Messages")
+                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("Car_Dealership.Models.Post", b =>

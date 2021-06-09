@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "All News";
+    Layout = "~/Views/Shared/Admin.cshtml";
 }
 
 @section Scripts{
@@ -11,14 +12,12 @@
 
 <h1>@ViewData["Title"]</h1>
 <div id="result"></div>
+
 <button type="button" id="allNews" onclick="ajaxGet()">click to view all news.</button>
 @*<div id="title"></div>
-<div id="description"></div>
-<div id="img_path"></div>*@
+    <div id="description"></div>
+    <div id="img_path"></div>*@
 <div id="contain"></div>
-
-
-
 
 <script type='text/javascript'>
 
@@ -45,7 +44,8 @@
                         tr.append("<p>" + obj.description + "</p>");
                         tr.append("<p>" + obj.img_path + "</p>");
                         tr.append("<p>" + obj.createdAt + "</p><hr>");
-                       
+                        tr.append("<button value=" + obj._id +" onclick=removenews(this)>delete</button><hr>");
+
 
                         $("#contain").append(tr);
                     });
@@ -66,7 +66,23 @@
 
             });
 
-        }
+    }
+
+
+    function removenews(data){
+        var id = $(data).val();
+        console.log(id);
+        $.ajax({
+            type: "DELETE",
+            url: 'http://localhost:3000/user/remove_news/' + id,
+            success: function (result) {
+                console.log(result);
+                location.reload(true);
+            }
+
+        });
+    }
+
 
 
 </script>

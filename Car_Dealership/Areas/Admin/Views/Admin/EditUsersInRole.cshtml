@@ -2,7 +2,7 @@
 @model List<UserRoleViewModel>
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/Admin.cshtml";
 
     //var roleId = ViewBag.roleId;
 }
@@ -13,7 +13,7 @@
             <h2>Add or remove users from this role</h2>
         </div>
         <div class="card-body">
-            @if(Model != null){
+            @if (Model != null){
                 @for (int i = 0; i < Model.Count; i++)
                 {
                     <div class="form-check m-1">

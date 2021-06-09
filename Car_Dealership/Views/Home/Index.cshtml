@@ -2,9 +2,6 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-
-
 <div class="home-background">
     <div class="home-title">
         <h1 class="display-4">Welcome</h1>
@@ -12,11 +9,7 @@
     </div>
 </div>
 
-
-
-
 <div class="container">
-
 
     <br />
     <h1 class="mt-4" style="text-align:center">LATEST CARS</h1>
@@ -57,117 +50,163 @@
         </div>
     }
 
+    <div id="result"></div>
+    <button type="button" class="btn btn-primary btn-block" id="allNews" onclick="ajaxGet()">click to view all news.</button>
 
+    <div id="contain">
 
+        <div id="reportWindow">
 
- 
-        <div class="container">
-            <div class="d-flex flex-row justify-content-center justify-content-around brands-logo">
-                <div class="logo-box">
-                    <img src="~/img/mercedes.png" alt="Mercedes-Benz">
-                </div>
-                <div class="logo-box">
-                    <img src="img/bmw.png" alt="BMW">
-                </div>
-                <div class="logo-box">
-                    <img src="img/audi.png" alt="Audi">
-                </div>
-                <div class="logo-box">
-                    <img src="img/lambo.png" alt="Lamborghini">
-                </div>
-                <div class="logo-box">
-                    <img src="img/volkswagen.png" alt="Volkswagen">
-                </div>
-                <div class="logo-box">
-                    <img src="img/porsche.jpg" alt="Porsche">
-                </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="d-flex flex-row justify-content-center justify-content-around brands-logo">
+            <div class="logo-box">
+                <img src="~/img/mercedes.png" alt="Mercedes-Benz">
+            </div>
+            <div class="logo-box">
+                <img src="img/bmw.png" alt="BMW">
+            </div>
+            <div class="logo-box">
+                <img src="img/audi.png" alt="Audi">
+            </div>
+            <div class="logo-box">
+                <img src="img/lambo.png" alt="Lamborghini">
+            </div>
+            <div class="logo-box">
+                <img src="img/volkswagen.png" alt="Volkswagen">
+            </div>
+            <div class="logo-box">
+                <img src="img/porsche.jpg" alt="Porsche">
             </div>
         </div>
- 
-
-
-
-    
-
-        <div class="containter">
-            <h1 class="our-services" style="text-align:center">OUR SERVICES</h1>
-            <div class="d-flex flex-row justify-content-center justify-content-around">
-                <div class="col-md-4 text-center mb-5">
-                    <i class="fas fa-tools fa-5x mt-3 mb-3"></i>
-                    <h4>Repair</h4>
-
-                </div>
-                <div class="col-md-4 text-center">
-
-                    <i class="fas fa-truck-loading fa-5x mt-3 mb-3"></i>
-                    <h4>Car Transport</h4>
-                </div>
-                <div class="col-md-4 text-center">
-                    <i class="fas fa-truck-loading fa-5x mt-3 mb-3"></i>
-                    <h4>Replacement Part</h4>
-
-                </div>
+    </div>
+    <div class="containter">
+        <h1 class="our-services" style="text-align:center">OUR SERVICES</h1>
+        <div class="d-flex flex-row justify-content-center justify-content-around">
+            <div class="col-md-4 text-center mb-5">
+                <i class="fas fa-tools fa-5x mt-3 mb-3"></i>
+                <h4>Repair</h4>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-truck-loading fa-5x mt-3 mb-3"></i>
+                <h4>Car Transport</h4>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-truck-loading fa-5x mt-3 mb-3"></i>
+                <h4>Replacement Part</h4>
             </div>
         </div>
-
-
-
+    </div>
 </div>
 
-<div id="result"></div>
-<button type="button" class="btn btn-primary btn-block" id="allNews" onclick="ajaxGet()">click to view all news.</button>
-
-<div id="contain"></div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <script type='text/javascript'>
 
-
-
-            // DO GET
-
     function ajaxGet() {
 
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:3000/user/allNews",
-                success: function (result) {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:3000/user/allNews",
+            success: function (result) {
 
-                    $.each(result, function (key, value) {
-                    @*  alert("Title: " + result[key].title + "; Description: " + result[key].description + ";");*@
-                       console.log( result[key].image);
-                    });
-                    $.each(result, function (index, obj) {
-                        var tr = $("<div></div>");
+                $.each(result, function (key, value) {
+                    @* alert("Title: " + result[key].title + "; Description: " + result[key].description + ";");*@
+                    console.log(result[key].image);
+                });
+                $.each(result, function (index, obj) {
+                    var tr = $("<div></div>");
 
+                    tr.append("<p>" + obj.title + "</p>");
+                    tr.append("<p>" + obj.description + "</p>");
+                    tr.append("<p>" + obj.img_path + "</p>");
+                    tr.append("<p>" + obj.createdAt + "</p><hr>");
+                    tr.append("<button value=" + obj._id + " onclick=showReportWindow(this)>Report</button><hr>");
 
-                        tr.append("<p>" + obj.title + "</p>");
-                        tr.append("<p>" + obj.description + "</p>");
-                        tr.append("<p>" + obj.img_path + "</p>");
-                        tr.append("<p>" + obj.createdAt + "</p><hr>");
-
-
-                        $("#contain").append(tr);
-                    });
-                    @*if (results.length > 0) {
+                    $("#contain").append(tr);
+                });
+                @*if (results.length > 0) {
                     $('#title').text(result[0].title);
                     $('#description').text(result[0].description);
-                        $('#img_path').text(result[0].img_path);
-                    }
-                    else {
-                        alert("No data.");
-                    }*@
-                    console.log("Success: ", result);
-                },
-                error: function (e) {
-                    $("#getResultDiv").html("Error");
-                    console.log("ERROR: ", e);
+                    $('#img_path').text(result[0].img_path);
                 }
+                else {
+                    alert("No data.");
+                }*@
+                console.log("Success: ", result);
+            },
+            error: function (e) {
+                $("#getResultDiv").html("Error");
+                console.log("ERROR: ", e);
+            }
+        });
+    }
 
-            });
+    function showReportWindow(data) {
+        var id = $(data).val();
+        var element = $("<form method='POST' class='d-flex flex-column'></form>");
 
+        element.append("<h4>" + id + "</h4>");
+        //element.append("<input placeholder='Report Reason'></input>");
+
+        var select = $("<select class='mb-3 mt-3'></select>")
+
+        select.append("<option>test</option>")
+        select.append("<option>test</option>")
+        select.append("<option>test</option>")
+        select.append("<option>test</option>")
+        select.append("<option>test</option>")
+        element.append(select)
+        element.append("<button type='button' value=" + id +" class='btn btn-danger' onclick='reportNews(this);'>Create Report</input>");
+
+        $("#reportWindow").append(element);
+
+        $("#reportWindow").css({ "opacity": "100%", "pointer-events": "all", "z-index": 1});
+
+        //opacity: 0;
+        //pointer - events: none;
+        //z - index: 0;
+    }
+
+    function reportNews(data) {
+        var id = $(data).val();
+        var select = $("select :selected").val();
+        console.log(id, select);
+        var obj = {
+            newsId: id,
+            reportReason: select
         }
+      $.ajax({
+          type: "POST",
+          url: 'http://localhost:3000/user/report_news/' + id,
+          data: obj,
+          dataType: "json",
+            encode: true,
+            success: function (result) {
+                console.log(result);
+                //location.reload(true);
+                $("#reportWindow").css({ "opacity": "0", "pointer-events": "none", "z-index": -1 });
+                $('form').remove();
+            }
+      });
 
 
+    }
+
+    function removenews(data) {
+        var id = $(data).val();
+        console.log(id);
+        $.ajax({
+            type: "DELETE",
+            url: 'http://localhost:3000/user/remove_news/' + id,
+            success: function (result) {
+                console.log(result);
+                location.reload(true);
+            }
+        });
+    }
 </script>
 
 <style>
@@ -187,6 +226,19 @@
             min-width: 150px;
         }
 
+    #reportWindow {
+        position: absolute;
+        background: white;
+        display: flex;
+        align-items: center;
+        width: 75%;
+        height: 350px;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 0;
+        transition: opacity 0.2s;
+    }
+
     @@media screen and (max-width: 1213px) {
         .right-side {
             float: right;
@@ -196,7 +248,6 @@
     @@media screen and (max-width: 770px) {
         .left-side {
             margin: 0 auto;
-
         }
 
         .right-side {
@@ -211,25 +262,10 @@
             min-width: 200px;
         }
     }
-</style>
-@*<div id="app" class="card-deck pt-4">
-        @for (var num = 1; num <= 4; num++)
-        {
-            var Card = $"Card_{num}";
 
-            <vue-card id="@Card" name="@Card" img="https://vuejs.org/images/logo.png" class="mb-6">
-             <h6>Card @num</h6>
-            </vue-card>
-        }
-
-    </div>*@
-
-
-
-<style>
     #app {
         background-color: lightgray;
     }
-
 </style>
+
 
