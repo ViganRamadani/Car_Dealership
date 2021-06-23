@@ -9,13 +9,19 @@
 a {
     color: #0366d6;
 }
-
+#fixedbutton {
+    position: fixed;
+    bottom: 43px;
+    right: 0px;
+}
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
-
+.fa-commenting{
+    width:180px;
+}
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #1b6ec2;

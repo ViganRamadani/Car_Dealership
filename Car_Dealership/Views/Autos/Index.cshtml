@@ -7,78 +7,139 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-    <a class="btn btn-primary text-center d-block mx-auto" style="width:60%;" asp-action="Create">Create New</a>
+@if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <a id="create" class="btn btn-primary text-center d-block mx-auto" style="width:60%;" asp-action="Create">Create New</a>}
     <div class="row">
         @foreach (var auto in Model)
         {
-        <div class="col-sm-4">
-            <div id="app" class="card mb-3">
-                <a asp-action="Details" asp-route-id="@auto.Id"><img src="~/img/@auto.Photo" asp-append-version="true" class="card-img-top" /></a>
-                <div class="card-body">
-                    <p class="card-text">
-                        <h3 class="text-muted">@auto.Price Euro</h3>
-                    </p>
-                    <ul class="" >
-                       @* <li class="text-decoration-none">Body Type: @auto.Body_Type</li>
-                        <li>Engine: @auto.Engine</li>
-                        <li>Year of Production: @auto.Auto_Production_Year</li>
-                        <li>Doganuar: @auto.IsDogan</li>
-                        <li>Power: @auto.Power HP </li>*@
-                        <div>
-                            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                            {
-                              
-                            <li>
-                                <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
-                            </li>
-                            <li>
-                                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
-                            </li>
-                        }
-                            <li><a class="btn btn-secondary btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a></li>
+            <div class="col-sm-3">
+                <div id="app" class="card bg-light">
+                    <div class="img"> <a asp-action="Details" asp-route-id="@auto.Id"><img src="~/img/@auto.Photo" asp-append-version="true" class="card-img-top align-middle " /></a></div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <h3 class="text-muted">@auto.Price Euro</h3>
+                        </p>
+                        <ul class="">
+                            <li class="text-decoration-none">Body Type: @auto.Body_Type</li>
+                            <li>Engine: @auto.Engine</li>
+                            @* <li>Year of Production: @auto.Auto_Production_Year</li>
+        <li>Doganuar: @auto.IsDogan</li>
+        <li>Power: @auto.Power HP </li>*@
+                            <div>
+                                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                {
+
+                                <li>
+                                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
+                                </li>
+                            }
+                                <li><a id="details" class="btn btn-secondary btn-sm mt-auto" asp-action="Details" asp-route-id="@auto.Id">Details</a></li>
+</div>
+                        </ul>
+                        @*<table style="text-align:center;width:100%">
+                                <tr>
+                                    <td><p>Engine: @auto.Engine</p></td>
+                                    <td><p>Body Type: @auto.Body_Type</p></td>
+                                    <td><p>Year of Production: @auto.Auto_Production_Year</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Doganuar: @auto.IsDogan  </p></td>
+                                    <td><p>Fuel Consumption: @auto.Fuel_Consumption l/100km </p></td>
+                                    <td><p>Power: @auto.Power HP </p></td>
+                                </tr>
+                                <tr>
+
+                                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                    {
+                                        <td>
+                                            <a class="btn btn-light btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-light btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
+                                        </td>
+                                    }
+                                    <td><a class="btn btn-light btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a></td>
+
+                                </tr>
+                            </table>*@
+
                     </div>
-                    </ul>
-                    @*<table style="text-align:center;width:100%">
-                <tr>
-                    <td><p>Engine: @auto.Engine</p></td>
-                    <td><p>Body Type: @auto.Body_Type</p></td>
-                    <td><p>Year of Production: @auto.Auto_Production_Year</p></td>
-                </tr>
-                <tr>
-                    <td><p>Doganuar: @auto.IsDogan  </p></td>
-                    <td><p>Fuel Consumption: @auto.Fuel_Consumption l/100km </p></td>
-                    <td><p>Power: @auto.Power HP </p></td>
-                </tr>
-                <tr>
-
-                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                    {
-                        <td>
-                            <a class="btn btn-light btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-light btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
-                        </td>
-                    }
-                    <td><a class="btn btn-light btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a></td>
-
-                </tr>
-            </table>*@
-
                 </div>
             </div>
-        </div>
         }
-    </div>
+        </div>
 
-        
-        
+
+
         <style>
+            div#app.card{
+                margin-bottom:50px;
+            }
             #app {
-                width: 60%;
+                width: 100%;
                 margin-left: auto;
                 margin-right: auto;
+                height:100%;
+                margin-top:35px;
+            }
+            .img{
+                height:57%;
+                background-color:black;
+            }
+                .img img {
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            .card-body{
+                height:30%;
+            }
+            .col-sm-3 {
+                margin-top: 35px;
+            }
+            .row {
+                margin-top: 50px;
+                margin-bottom: 50px;
+            }
+            @*.container{
+                background-color:black;
+            }*@
+            #create {
+                margin-top: 100px;
+                margin-bottom: -80px;
+            }
+            #details{
+                width:100%;
+                border:none;
+                background-color:darkblue;
+            }
+            .container {
+                background-color: white;
+                color: black;
+            }
+
+            .navbar-expand-lg .navbar-nav .nav-link {
+                text-transform: uppercase;
+                transition: all 0.5s ease;
+                padding: 16px 0;
+                font-size: 13px;
+                font-weight: 400;
+                position: relative;
+                color: black;
+            }
+
+            .navbar .navbar-brand {
+                margin: 0;
+                padding: 0;
+                font-size: 34px;
+                font-weight: 300;
+                text-transform: capitalize;
+                color: black;
+                margin-right: 3rem;
             }
         </style>
 
