@@ -74,8 +74,16 @@ body {
     background-repeat: no-repeat;
     height: 100vh;
     width: 100%;
-    margin-top: -90px;
+    margin-top: -60px;
     padding-top: 300px;
+}
+.cars-banner {
+    background-image: url(../img/home-background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 50vh;
+    width: 100%;
+    padding-top: 150px;
 }
 
 .caption {
@@ -117,4 +125,10 @@ body {
 .our-services {
     margin-top: 100px;
     margin-bottom: 50px;
+}
+
+.text-cars{
+    color: #000000;
+    font-size: 32px;
+    margin-bottom: 20px;
 }

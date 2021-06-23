@@ -3,31 +3,47 @@
 @model IEnumerable<Car_Dealership.Models.Warranty>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Warranties";
 }
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<h1>Index</h1>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-@foreach (var item in Model)
-{
 
 
-<div class="card mb-4 box-shadow">
-        <div class="card-header">
-            <h4 class="my-0 font-weight-normal"> @Html.DisplayFor(modelItem => item.warrantyName)</h4>
-        </div>
-        <div class="card-body">
-            <h1 class="card-title pricing-card-title"> @Html.DisplayFor(modelItem => item.warrantyYears)<small class="text-muted">Years</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-                <li> @Html.DisplayFor(modelItem => item.warrantyCoverage)</li>
-               
+<section class="w3l-about-breadcrumb position-relative text-center">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+        <div class="container py-lg-5 py-3">
+            <h2 class="title">Warranties</h2>
+            <ul class="breadcrumbs-custom-path mt-2">
+                <li><a href="#url">Home</a></li>
+                <li class="active"><span class="fa fa-angle-double-right mx-2" aria-hidden="true"></span> Warranties </li>
             </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
         </div>
-    </div>      }
+    </div>
+</section>
+
+
+<div class="row">
+    <div class="col-sm-12 mt-5">
+        <a class="btn btn-primary float-right btn btn-success " style="width:8%;" asp-action="Create">Add <i class="fas fa-plus"></i></a>
+    </div>
+</div>
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+
+
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal"> @Html.DisplayFor(modelItem => item.warrantyName)</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title"> @Html.DisplayFor(modelItem => item.warrantyYears)<small class="text-muted">Years</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li> @Html.DisplayFor(modelItem => item.warrantyCoverage)</li>
+
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
+            </div>
+        </div>  }
     <table class="table table-dark table-striped">
         <thead>
             <tr>

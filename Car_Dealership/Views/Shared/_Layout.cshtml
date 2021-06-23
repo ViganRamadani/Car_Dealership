@@ -1,4 +1,4 @@
-
+﻿
 @using Microsoft.AspNetCore.Identity;
 
 @inject SignInManager<ApplicationUser> _signInManager
@@ -40,36 +40,39 @@
                         </li>
                         <li class="nav-item">
 
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a>
+                            <a class="nav-link" asp-area="" asp-controller="About" asp-action="Index">About</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Autos" asp-action="Index">Cars</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="NewsUpload">Services</a>
+                            <a class="nav-link" asp-area="" asp-controller="Services" asp-action="Index">Services</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Warranties" asp-action="Index">Warranties</a>
 
                         </li>
-                        @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item">
+
+
+                        <li class="nav-item">
+                            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
                                 <a class="nav-link" asp-area="Admin" asp-controller="Admin" asp-action="ListRoles">Admin Panel</a>
-                            </li>
-                        }
+
+                            }
+                        </li>
 
                     </ul>
-
+                    <partial name="_LoginPartial" />
                     <ul>
                         <li class="nav-item">
-                            <a href="contact.html" class="btn btn-primary d-none d-lg-block btn-style mr-2">
+                            <a class="btn btn-primary text-right d-none d-lg-block btn-style mr-2" asp-area="" asp-controller="Contact" asp-action="Index">
                                 Contact Us
                             </a>
                         </li>
                     </ul>
 
-                    <partial name="_LoginPartial" />
+
                 </div>
             </div>
         </div>
@@ -111,12 +114,7 @@
                           <li class="nav-item">
                               <a class="nav-link text-dark" asp-area="" asp-controller="Warranties" asp-action="Index">Warranties</a>
                           </li>
-                          @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                          {
-                              <li class="nav-item">
-                                  <a class="nav-link" asp-area="Admin" asp-controller="Admin" asp-action="ListRoles">Admin Panel</a>
-                              </li>
-                          }
+
 
                       </ul>
                   </div>
