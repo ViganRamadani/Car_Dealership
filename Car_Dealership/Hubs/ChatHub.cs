@@ -9,7 +9,10 @@ namespace Car_Dealership.Hubs
 {
     public class ChatHub : Hub
     {
-        public async Task SendMessage(Message message) =>
-           await Clients.All.SendAsync("receiveMessage", message);
+        public async Task SendMessage(string name, string message)
+        {
+            // Call the broadcastMessage method to update clients.
+           await Clients.All.SendAsync("RecieveMessage",name, message);
+        }
     }
 }

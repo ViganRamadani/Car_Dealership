@@ -40,7 +40,7 @@ namespace Car_Dealership
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
 
-          
+            services.AddSignalR();
 
             services.AddAuthentication()
                 .AddGoogle(options => 
@@ -75,10 +75,7 @@ namespace Car_Dealership
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseSignalR(route =>
-            {
-                route.MapHub<ChatHub>("/Home/Index");
-            });
+        
 
             app.UseEndpoints(endpoints => {
                     endpoints.MapControllerRoute(
@@ -88,6 +85,7 @@ namespace Car_Dealership
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/chatHub");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

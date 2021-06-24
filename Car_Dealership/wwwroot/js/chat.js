@@ -1,4 +1,43 @@
-﻿class Message {
+﻿"use strict";
+
+var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+
+
+connection.start().then(function () {
+    document.getElementById("sendButton").disabled = false;
+}).catch(function (err) {
+    return console.error(err.toString());
+});
+
+
+connection.on("RecieveMessage", function (user, message) {
+
+    var div = document.getElementById("Chats");
+    var p = document.createElement("p");
+    var h = document.createElement("h4");
+    var res = user.substring(0, 5);
+    p.innerText = res;
+    h.innerText = message;
+    div.appendChild(p);
+    div.appendChild(h);
+  
+
+});
+
+document.getElementById("SendMessageButton").addEventListener("click", function (event) {
+    var user = document.getElementById("name").value;
+    var message = document.getElementById("inputText").value;
+    var currentdate = new Date();
+    
+
+        connection.invoke("SendMessage", user, message).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+    
+});
+/*class Message {
     constructor(username, text, when) {
         this.userName = username;
         this.text = text;
@@ -62,3 +101,5 @@ function addMessageToChat(message) {
     container.appendChild(when);
     chat.appendChild(container);
 }
+*/
+
