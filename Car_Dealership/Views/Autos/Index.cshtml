@@ -7,18 +7,19 @@
     ViewData["Title"] = "Cars";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/css/autoCars.css" rel="stylesheet" />
 <section class="w3l-about-breadcrumb position-relative text-center">
     <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
         <div class="container py-lg-5 py-3">
             <h2 class="title">All Cars</h2>
             <ul class="breadcrumbs-custom-path mt-2">
-                <li><a asp-controller="About" asp-action="Index"/>Home</li>
+                <li><a asp-controller="About" asp-action="Index" />Home</li>
                 <li class="active"><span class="fa fa-angle-double-right mx-2" aria-hidden="true"></span> Cars </li>
             </ul>
         </div>
     </div>
 </section>
-
+<div id="smslogo"><a asp-controller="Home" asp-action="indexMessage"><img style=" width: 158px;" src="~/img/logoSms.png" alt="Alternate Text" /></a></div>
 <div class="container">
 
     <div class="row">
@@ -34,13 +35,8 @@
                 <div id="app" class="card mb-3">
                     <a asp-action="Details" asp-route-id="@auto.Id"><img src="~/img/@auto.Photo" asp-append-version="true" class="card-img-top" /></a>
                     <div class="card-body">
-                        <h3 class="text-cars">@auto.Brand</h3>
+                        <h4 class="text-cars">@auto.Brand</h4>
                         <ul class="">
-                            @* <li class="text-decoration-none">Body Type: @auto.Body_Type</li>
-                                <li>Engine: @auto.Engine</li>
-                                <li>Year of Production: @auto.Auto_Production_Year</li>
-                                <li>Doganuar: @auto.IsDogan</li>
-                                <li>Power: @auto.Power HP </li>*@
                             <div class="text-right">
                                 @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                                 {
@@ -51,33 +47,6 @@
                                 <a class="btn btn-light btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a>
                             </div>
                         </ul>
-                        @*<table style="text-align:center;width:100%">
-                                <tr>
-                                    <td><p>Engine: @auto.Engine</p></td>
-                                    <td><p>Body Type: @auto.Body_Type</p></td>
-                                    <td><p>Year of Production: @auto.Auto_Production_Year</p></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Doganuar: @auto.IsDogan  </p></td>
-                                    <td><p>Fuel Consumption: @auto.Fuel_Consumption l/100km </p></td>
-                                    <td><p>Power: @auto.Power HP </p></td>
-                                </tr>
-                                <tr>
-
-                                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                                    {
-                                        <td>
-                                            <a class="btn btn-light btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-light btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
-                                        </td>
-                                    }
-                                    <td><a class="btn btn-light btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a></td>
-
-                                </tr>
-                            </table>*@
-
                     </div>
                 </div>
             </div>
@@ -93,102 +62,17 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    #smslogo {
+        position: fixed;
+        right: 133px;
+        bottom: 51px;
+        z-index: 500;
+        width: 18px;
+    }
+
+    .fa-comment-dots {
+        width: 100px;
+    }
 </style>
 
-@*<style>
-        * {
-            box-sizing: border-box;
-        }
-
-        div#Galery {
-            height: 450px;
-        }
-
-            div#Galery img {
-                height: 450px;
-            }
-
-        #app {
-            background-color: lightgray;
-            border-radius: 40px;
-        }
-
-        .left-side img {
-            width: 450px;
-            margin: 3% 0 0 9%;
-        }
-
-        .left-side {
-            background-color: black;
-        }
-
-        .right-side {
-            float: right;
-        }
-
-            .right-side p {
-                min-width: 150px;
-            }
-
-        @@media screen and (max-width: 1213px) {
-            .right-side {
-                float: right;
-            }
-        }
-
-        @@media screen and (max-width: 770px) {
-            .left-side {
-                margin: 0 auto;
-            }
-
-            .right-side {
-                text-align: center;
-            }
-        }
-
-        @@media screen and (max-width: 365px) {
-            .left-side img {
-                width: 250px;
-                margin: 0 auto;
-                min-width: 200px;
-            }
-        }
-    </style>*@
-<!--<table class="table">
-    <thead>
-        <tr>
-            @* <th>@Html.DisplayNameFor(model => model.Photo)</th>*@
-    @*<th>@Html.DisplayNameFor(model => model.Brand)</th>*@
-    <th>
-        @*Html.DisplayNameFor(model => model.Engine)</th>
-        <th>@Html.DisplayNameFor(model => model.Body_Type)</th>
-        <th>@Html.DisplayNameFor(model => model.Start_Production)</th>
-        <th>@Html.DisplayNameFor(model => model.End_Production)</th>
-        <th>@Html.DisplayNameFor(model => model.Price)</th>
-    </tr>
-</thead>
-<tbody>
-    @*  @foreach (var auto in Model)
-        {*@
-    <tr>
-        @* <td>
-<img src="~/img/@auto.Photo" class="" height="80" width="80" asp-append-version="true" /></td>*@
-        @*<td>
-    @auto.Brand
-</td>*@
-        <td>
-            @*auto.Engine</td>
-        <td>@auto.Body_Type</td>
-        <td>@auto.Start_Production</td>
-        <td>@auto.End_Production</td>
-        <td>@auto.Price</td>
-        <td>
-            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@*auto.Id">Edit</a>
-            <a class="btn btn-primary" asp-action="Details" asp-route-id="@auto.Id">Details</a>
-            <a class="btn btn-primary" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
-        </td>
-    </tr>
-
-    @* }*@
-        </tbody>
-        </table>-->
