@@ -13,7 +13,7 @@
     </div>
 </div>
 
-
+<div id="smslogo"><a asp-controller="Home" asp-action="indexMessage"><img style=" width: 158px;" src="~/img/logoSms.png" alt="Alternate Text" /></a></div>
 <div class="w3l-bottom-grids">
     <div class="container-fluid px-0">
         <div class="bottomhny-grids-sec">
@@ -67,7 +67,7 @@
         </div>
 </section>
 
-    }
+    
 
     <div id="result"></div>
     <button type="button" class="btn btn-primary btn-block" id="allNews" onclick="ajaxGet()">click to view all news.</button>
@@ -289,111 +289,6 @@
         </div>
     </div>
 </section>  
-<!--
-
-
-
-
-     <div class="container">
-
-
-         <br />
-         <h1 class="mt-4" style="text-align:center">LATEST CARS</h1>
-         <br />
-
-         @for (int i = 0; i < 1; i++)
-         {
-             <div class="row mt-2">
-                 <div class="col-md-4">
-                     <div class="card latest-cars">
-                         <img class="card-img-top" src="/img/Gclass.jpg">
-                         <div class="card-body">
-                             <h5 class="card-title">G-Class</h5>
-                             <p class="card-text">$60.000</p>
-                         </div>
-                     </div>
-                 </div>
-
-                 <div class="col-md-4">
-                     <div class="card latest-cars">
-                         <img class="card-img-top" src="/img/audi.jpg">
-                         <div class="card-body">
-                             <h5 class="card-title">AUDI SQ8 4.0 TFSI QUATTRO</h5>
-                             <p class="card-text">$50.000</p>
-                         </div>
-                     </div>
-                 </div>
-
-                 <div class="col-md-4">
-                     <div class="card latest-cars">
-                         <img class="card-img-top" src="/img/mercedes.jpg">
-                         <div class="card-body">
-                             <h5 class="card-title">S 400 D LONG 4MATIC AMG-LINE</h5>
-                             <p class="card-text">$35.000</p>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         }
-
-
-
-
-
-             <div class="container">
-                 <div class="d-flex flex-row justify-content-center justify-content-around brands-logo">
-                     <div class="logo-box">
-                         <img src="~/img/mercedes.png" alt="Mercedes-Benz">
-                     </div>
-                     <div class="logo-box">
-                         <img src="img/bmw.png" alt="BMW">
-                     </div>
-                     <div class="logo-box">
-                         <img src="img/audi.png" alt="Audi">
-                     </div>
-                     <div class="logo-box">
-                         <img src="img/lambo.png" alt="Lamborghini">
-                     </div>
-                     <div class="logo-box">
-                         <img src="img/volkswagen.png" alt="Volkswagen">
-                     </div>
-                     <div class="logo-box">
-                         <img src="img/porsche.jpg" alt="Porsche">
-                     </div>
-                 </div>
-             </div>
-
-
-
-
-
-
-             <div class="containter">
-                 <h1 class="our-services" style="text-align:center">OUR SERVICES</h1>
-                 <div class="d-flex flex-row justify-content-center justify-content-around">
-                     <div class="col-md-4 text-center mb-5">
-                         <i class="fas fa-tools fa-5x mt-3 mb-3"></i>
-                         <h4>Repair</h4>
-
-                     </div>
-                     <div class="col-md-4 text-center">
-
-                         <i class="fas fa-truck-loading fa-5x mt-3 mb-3"></i>
-                         <h4>Car Transport</h4>
-                     </div>
-                     <div class="col-md-4 text-center">
-                         <i class="fas fa-truck-loading fa-5x mt-3 mb-3"></i>
-                         <h4>Replacement Part</h4>
-
-                     </div>
-                 </div>
-             </div>
-    </div>
-    -->
-
-
-
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
@@ -407,17 +302,17 @@
 
 
                 $.each(result, function (key, value) {
-                    @* alert("Title: " + result[key].title + "; Description: " + result[key].description + ";");*@
+                  
                     console.log(result[key].image);
                 });
                 $.each(result, function (index, obj) {
-                    var tr = $("<div></div>");
+                    var tr = $("<div class='w-75 p-3 mx-auto border'></div>");
 
-                    tr.append("<p>" + obj.title + "</p>");
-                    tr.append("<p>" + obj.description + "</p>");
-                    tr.append("<p>" + obj.img_path + "</p>");
+                    tr.append("<br><h3 class='text-center text-dark'>" + obj.title + "</h3><hr>");
+                    tr.append("<p class='text-center text-dark'>" + obj.description + "</p>");
+                    @*tr.append("<p style:'display:none'>" + obj.img_path + "</p>");*@
                     tr.append("<p>" + obj.createdAt + "</p><hr>");
-                    tr.append("<button value=" + obj._id + " onclick=showReportWindow(this)>Report</button><hr>");
+                    tr.append("<button class='btn btn-warning btn-lg btn-block text-center text-dark' value=" + obj._id + " onclick=showReportWindow(this)>Report</button><hr>");
 
                     $("#contain").append(tr);
                 });
@@ -449,11 +344,11 @@
         var select = $("<select class='mb-3 mt-3'></select>")
 
 
-        select.append("<option>test</option>")
-        select.append("<option>test</option>")
-        select.append("<option>test</option>")
-        select.append("<option>test</option>")
-        select.append("<option>test</option>")
+        select.append("<option>Uncivil, rude or vulgar</option>")
+        select.append("<option>Discrimination</option>")
+        select.append("<option>Public shaming</option>")
+        select.append("<option>Over-posting</option>")
+        select.append("<option>Conflict of interest</option>")
         element.append(select)
         element.append("<button type='button' value=" + id +" class='btn btn-danger' onclick='reportNews(this);'>Create Report</input>");
 
@@ -506,6 +401,34 @@
 </script>
 
 <style>
+    #reportWindow {
+        position: absolute;
+        background: white;
+        display: grid;
+        align-items: center;
+        width: 100%;
+        height: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        pointer-events: none;
+        z-index: 0;
+        transition: opacity 0.2s;
+    }
+    #reportWindow form{
+        width:70%;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    #smslogo {
+        position: fixed;
+        right: 133px;
+        bottom: 51px;
+        z-index: 500;
+        width: 18px;
+    }
+    .fa-comment-dots {
+        width: 100px;
+    }
     * {
         box-sizing: border-box;
     }
@@ -534,7 +457,7 @@
         z-index: 0;
         transition: opacity 0.2s;
     }
-
+    
     @@media screen and (max-width: 1213px) {
         .right-side {
             float: right;

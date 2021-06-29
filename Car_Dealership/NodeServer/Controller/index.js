@@ -76,6 +76,29 @@ router.post('/report_news/:id', async(req, res) => {
     }
 })
 
+router.get('/getNewsReports', (req, res) => {
+    ReportNews.find().sort({ createdAt: -1 })
+        .then(reports => {
+            res.status(200).json(reports)
+            console.log(reports)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
+})
+
+router.delete('/removeNewsReport/:id', (req, res) => {
+    console.log(req.params.id)
+    ReportNews.findByIdAndDelete(req.params.id)
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch(err => {
+            res.send(err)
+        })
+})
+
 /*app.get('/img', function (req, res) {
     res.sendFile(__dirname + "/index.html");
 });

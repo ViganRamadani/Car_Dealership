@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Car_Dealership.Models.Meeting>
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> _signInManager;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/MeetingCss.css" rel="stylesheet" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div id="app">
+
+
+    @*<div v-for="meeting in meet_list">*@
+    @* <p>{{/*meeting.id*/}}</p>
+        <p>{{/*meeting.createdOn*/}}</p>
+        <p>{{/*meeting*/}}</p>*@
+   @* <button asp-action="Create" style="width:80%;" class=" btn-secondary justify-content-center mx-auto" >Create New</button>*@
+    <p style="text-align:center"><i>For this table is used Vue.Js Framework</i></p>
+    <table class="vue-table table-dark " border="1">
+        <tr>
+            <th><a class="btn btn-secondary justify-content-center " style="width:80%;" asp-action="Create">Create New</a></th>
+        </tr>
+        <tr>
+            
+            <th>Meeting ID</th>
+            <th>Meeting Time</th>
+            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+            {
+                <th>Users ID</th>
+            }
+            </tr>
+        <tr v-for="meeting in meet_list">
+            <td>{{meeting.id}}</td>
+            <td>{{meeting.createdOn}}</td>
+            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+            {
+                <td>{{meeting.userId}}</td>
+            }
+
+        </tr>
+
+    </table>
+    @*
+        </div>*@
+</div>
+
+<br />  
+<br />  
+<br />  
+<br />  
+<br />  
+<br />  
+<br />  
+<table class="asp-Table table table-dark"  border="1">
+    <thead>
+        <tr>
+            <th><a class="btn btn-secondary justify-content-center " style="width:80%;" asp-action="Create">Create New</a></th>
+            
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+
+                {
+                    <a asp-action="Edit" style="color:white" class="btn-primary" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Delete" style="color:white" asp-route-id="@item.Id">Delete</a>
+                }
+
+                <a asp-action="Details" style="color:white; padding:6px;" class="btn-primary" asp-route-id="@item.Id">Details</a>
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            message: `Vue in the works!`,
+            user: {
+            },
+            meet_list: []
+
+        },
+        mounted: function () {
+            let meetlist = '@Html.Raw(Json.Serialize(Model))';
+            this.meet_list = JSON.parse(meetlist);
+        }
+    })
+</script>

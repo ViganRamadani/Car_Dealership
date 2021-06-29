@@ -81,6 +81,12 @@ namespace Car_Dealership.Controllers
             return View();
         }
 
+        public IActionResult NewsReports()
+        {
+            var users = _userManager.Users;
+            return View(users);
+        }
+
 
        /* [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
