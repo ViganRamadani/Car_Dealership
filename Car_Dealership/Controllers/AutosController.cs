@@ -55,14 +55,15 @@ namespace Car_Dealership.Controllers
 
             /*return View( _context.Autos.ToListAsync());*/
         }
+
        /* [AllowAnonymous]
         public async Task<IActionResult> Index(string autoName)
         {
             var allAutos -
 
             return View(await _context.Autos.ToListAsync());
-        }
-       
+        }*/
+
 
         // GET: Autos/Details/5
         [AllowAnonymous]

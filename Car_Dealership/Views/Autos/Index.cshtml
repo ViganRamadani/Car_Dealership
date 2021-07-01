@@ -21,9 +21,14 @@
 </section>
 <div id="smslogo"><a asp-controller="Home" asp-action="indexMessage"><img style=" width: 158px;" src="~/img/logoSms.png" alt="Alternate Text" /></a></div>
 <div class="container">
-    <form method="get">
-        <input type="text" name="autoName" placeholder="Search by brand" />
-        <input type="submit" name="Find" value="" />
+    <form method="get" class="row" style="margin-top:18px;margin-left:15px;">
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="autoName" placeholder="Search by brand" />
+        </div>   
+        <div>
+            <input type="submit" class="btn btn-primary mb-2" name="Find" value="Find" />
+
+        </div>
     </form>
     <div class="row">
         <div class="col-sm-12 mt-5">
