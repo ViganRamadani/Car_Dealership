@@ -30,11 +30,38 @@ namespace Car_Dealership.Controllers
         }
 
         // GET: Autos
+        
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string autoName)
         {
-            return View(await _context.Autos.ToListAsync());
+            var allAutos = await _context.Autos.ToListAsync();
+            var autos = new List<Auto>();
+            if (autoName != null)
+            {
+                foreach(var a in allAutos)
+                {
+                    if (a.Brand.ToLower().Contains(autoName.ToLower()))
+                    {
+                        autos.Add(a);
+                    }
+                }
+                return View(autos); 
+
+            }
+            else
+            {
+                return View(allAutos);
+            }
+
+            /*return View( _context.Autos.ToListAsync());*/
         }
+       /* [AllowAnonymous]
+        public async Task<IActionResult> Index(string autoName)
+        {
+            var allAutos -
+
+            return View(await _context.Autos.ToListAsync());
+        }*/
 
         // GET: Autos/Details/5
         [AllowAnonymous]

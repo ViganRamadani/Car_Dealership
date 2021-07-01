@@ -28,6 +28,7 @@ namespace Car_Dealership.Data
 
         public DbSet<Warranty> Warranties { get; set; }
         public DbSet<UserPostLike> UserPostLikes { get; set; }
+        public DbSet<Car_Dealership.Models.Favorite> Favorite { get; set; }
 
     }
 }
