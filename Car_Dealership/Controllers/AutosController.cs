@@ -61,7 +61,8 @@ namespace Car_Dealership.Controllers
             var allAutos -
 
             return View(await _context.Autos.ToListAsync());
-        }*/
+        }
+       
 
         // GET: Autos/Details/5
         [AllowAnonymous]

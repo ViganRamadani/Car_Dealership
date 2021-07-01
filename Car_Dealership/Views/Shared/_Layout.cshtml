@@ -49,6 +49,9 @@
                             <a class="nav-link" asp-area="" asp-controller="Services" asp-action="Index">Services</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Meetings" asp-action="Index">Appointment</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Warranties" asp-action="Index">Warranties</a>
 
                         </li>
@@ -77,55 +80,6 @@
             </div>
         </div>
     </header>
-
-    <!--  <header>
-
-      <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-dark  box-shadow mb-3">
-              <div class="container">
-                  <img src="~/img/logo.png" class="logo" />
-                  <button class="navbar-toggler border-white" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                          aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon border-white"></span>
-                  </button>
-                  <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                      <partial name="_LoginPartial" />
-                      <ul class="navbar-nav flex-grow-1">
-                          <li class="nav-item">
-                              <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a>
-                          </li>
-
-                          <li class="nav-item">
-                              <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="allNews">Cars</a>
-                          </li>
-
-                          <li class="nav-item">
-                              <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="NewsUpload">Servivces</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="NewsUpload">Contact</a>
-                          </li>
-
-                          <li class="nav-item">
-                              <a class="nav-link text-dark" asp-area="" asp-controller="Autos" asp-action="Index">Cars</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link text-dark" asp-area="" asp-controller="Warranties" asp-action="Index">Warranties</a>
-                          </li>
-
-
-                      </ul>
-                  </div>
-                  </div>
-          </nav>
-
-
-      </header>-->
-
-
-
 
 
     <main role="main" class="pb-3">
@@ -263,7 +217,11 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     @RenderSection("Scripts", required: false)
-
+   
 </body>
 </html>
-
+<style>
+    header {
+        background-color: black !important;
+    }
+</style>
