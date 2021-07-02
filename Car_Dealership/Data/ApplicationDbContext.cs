@@ -30,5 +30,7 @@ namespace Car_Dealership.Data
         public DbSet<UserPostLike> UserPostLikes { get; set; }
         public DbSet<Car_Dealership.Models.Meeting> Meeting { get; set; }
 
+        public DbSet<Car_Dealership.Models.Favorite> Favorites { get; set; }
+
     }
 }

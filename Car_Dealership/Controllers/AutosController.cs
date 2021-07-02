@@ -30,7 +30,7 @@ namespace Car_Dealership.Controllers
         }
 
         // GET: Autos
-        
+
         [AllowAnonymous]
         public async Task<IActionResult> Index(string autoName)
         {
@@ -38,14 +38,14 @@ namespace Car_Dealership.Controllers
             var autos = new List<Auto>();
             if (autoName != null)
             {
-                foreach(var a in allAutos)
+                foreach (var a in allAutos)
                 {
                     if (a.Brand.ToLower().Contains(autoName.ToLower()))
                     {
                         autos.Add(a);
                     }
                 }
-                return View(autos); 
+                return View(autos);
 
             }
             else
@@ -53,16 +53,8 @@ namespace Car_Dealership.Controllers
                 return View(allAutos);
             }
 
-            /*return View( _context.Autos.ToListAsync());*/
+
         }
-
-       /* [AllowAnonymous]
-        public async Task<IActionResult> Index(string autoName)
-        {
-            var allAutos -
-
-            return View(await _context.Autos.ToListAsync());
-        }*/
 
 
         // GET: Autos/Details/5
@@ -83,7 +75,52 @@ namespace Car_Dealership.Controllers
 
             return View(auto);
         }
+        [AllowAnonymous]
+        public IActionResult AddToFavorite(int id)
+        {
+            var user = _userManager.GetUserAsync(HttpContext.User);
+            Favorite favorites = new Favorite();
+            favorites.UserId = user.Result.Id;
+            favorites.Auto_Id = id;
+            _context.Favorites.Add(favorites);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+        [AllowAnonymous]
+        public IActionResult DisplayFavorites()
+        {
+            var user = _userManager.GetUserAsync(HttpContext.User);
 
+            var results = _context.Favorites.Where(car => car.UserId.Equals(user.Result.Id)).ToList();
+            var cars = new List<Auto>();
+
+            foreach (var result in results)
+            {
+                Auto temp = _context.Autos.Where(car => car.Id.Equals(result.Auto_Id)).FirstOrDefault();
+                cars.Add(temp);
+            }
+            return View(cars);
+        }
+        [AllowAnonymous]
+        public IActionResult DeleteFavorite(int id)
+        {
+            var user = _userManager.GetUserAsync(HttpContext.User);
+
+            var results = _context.Favorites.Where(car => car.Auto_Id.Equals(id) && car.UserId.Equals(user.Result.Id)).First();
+            _context.Favorites.Remove(results);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(DisplayFavorites));
+            /* var cars = new List<Auto>();*/
+
+            /*foreach (var result in results)
+            {
+                Favorite temp = _context.Favorites.Where(car => car.Auto_Id.Equals(result.Auto_Id)).FirstOrDefault();
+                _context.Favorites.Remove(temp);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(DisplayFavorites));
+            }*/
+            /*return View();*/
+        }
         // GET: Autos/Create
         public IActionResult Create()
         {

@@ -3,10 +3,8 @@
 
 @model IEnumerable<Car_Dealership.Models.Auto>
 
-@{
-    ViewData["Title"] = "Cars";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewData["Title"] = "Cars";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 <link href="~/css/autoCars.css" rel="stylesheet" />
 <section class="w3l-about-breadcrumb position-relative text-center">
     <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
@@ -24,12 +22,13 @@
     <form method="get" class="row" style="margin-top:18px;margin-left:15px;">
         <div class="col-sm-10">
             <input type="text" class="form-control" name="autoName" placeholder="Search by brand" />
-        </div>   
+        </div>
         <div>
             <input type="submit" class="btn btn-primary mb-2" name="Find" value="Find" />
 
         </div>
     </form>
+    <a class="btn btn-light btn-sm" asp-action="DisplayFavorites">DisplayFavorites</a>
     <div class="row">
         <div class="col-sm-12 mt-5">
             <a class="btn btn-primary float-right btn btn-success " style="width:8%;" asp-action="Create">Add <i class="fas fa-plus"></i></a>
@@ -39,26 +38,27 @@
 
         @foreach (var auto in Model)
         {
-            <div class="col-sm-4 mt-4">
-                <div id="app" class="card mb-3">
-                    <a asp-action="Details" asp-route-id="@auto.Id"><img src="~/img/@auto.Photo" asp-append-version="true" class="card-img-top" /></a>
-                    <div class="card-body">
-                        <h4 class="text-cars">@auto.Brand</h4>
-                        <ul class="">
-                            <div class="text-right">
-                                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                                {
+<div class="col-sm-4 mt-4">
+    <div id="app" class="card mb-3">
+        <a asp-action="Details" asp-route-id="@auto.Id"><img src="~/img/@auto.Photo" asp-append-version="true" class="card-img-top" /></a>
+        <div class="card-body">
+            <h4 class="text-cars">@auto.Brand</h4>
+            <ul class="">
+                <div class="text-right">
+                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
 
-                                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
-                                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>
-                                }
-                                <a class="btn btn-light btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a>
-                            </div>
-                        </ul>
-                    </div>
+    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>}
+                    @if (_signInManager.IsSignedIn(User))
+                    {
+    <a class="btn btn-light btn-sm" asp-action="AddToFavorite" asp-route-id="@auto.Id">Favorite</a>}
+                    <a class="btn btn-light btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a>
                 </div>
-            </div>
-        }
+            </ul>
+        </div>
+    </div>
+</div>}
     </div>
 </div>
 
