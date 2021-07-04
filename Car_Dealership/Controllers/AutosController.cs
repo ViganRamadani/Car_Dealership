@@ -32,10 +32,22 @@ namespace Car_Dealership.Controllers
         // GET: Autos
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index(string autoName)
+        public async Task<IActionResult> Index(string autoName, string? sortByPrice)
         {
             var allAutos = await _context.Autos.ToListAsync();
             var autos = new List<Auto>();
+            if (!String.IsNullOrEmpty(sortByPrice))
+            {
+                if (sortByPrice.Equals("lowest"))
+                {
+                    allAutos = allAutos.OrderBy(x => x.Price).ToList();
+
+                } else if (sortByPrice.Equals("highest"))
+                {
+                    allAutos = allAutos.OrderByDescending(x => x.Price).ToList();
+                }
+
+            }
             if (autoName != null)
             {
                 foreach (var a in allAutos)
@@ -90,10 +102,10 @@ namespace Car_Dealership.Controllers
         public IActionResult DisplayFavorites()
         {
             var user = _userManager.GetUserAsync(HttpContext.User);
-
+    
             var results = _context.Favorites.Where(car => car.UserId.Equals(user.Result.Id)).ToList();
             var cars = new List<Auto>();
-
+            
             foreach (var result in results)
             {
                 Auto temp = _context.Autos.Where(car => car.Id.Equals(result.Auto_Id)).FirstOrDefault();

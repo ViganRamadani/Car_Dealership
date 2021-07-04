@@ -20,7 +20,7 @@
                     @if (_signInManager.IsSignedIn(User))
                     {
                         
-                        <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
+                        @*<a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>*@
                          <a class="btn btn-light btn-sm" asp-action="DeleteFavorite" asp-route-id="@auto.Id">DeleteFavorite</a>
                         }
                         <a class="btn btn-light btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a>

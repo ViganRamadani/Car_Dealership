@@ -28,7 +28,15 @@
 
         </div>
     </form>
-    <a class="btn btn-light btn-sm" asp-action="DisplayFavorites">DisplayFavorites</a>
+    @if (_signInManager.IsSignedIn(User))
+    {
+        <a class="btn btn-light btn-sm" asp-action="DisplayFavorites">DisplayFavorites</a>
+                    }
+
+    <a class="btn btn-light btn-sm" asp-action="Index" asp-route-sortByPrice="lowest">Order lowest to highest</a>
+    <a class="btn btn-light btn-sm" asp-action="Index" asp-route-sortByPrice="highest">Order highest to lowest</a>
+
+
     <div class="row">
         <div class="col-sm-12 mt-5">
             <a class="btn btn-primary float-right btn btn-success " style="width:8%;" asp-action="Create">Add <i class="fas fa-plus"></i></a>
@@ -41,8 +49,9 @@
 <div class="col-sm-4 mt-4">
     <div id="app" class="card mb-3">
         <a asp-action="Details" asp-route-id="@auto.Id"><img src="~/img/@auto.Photo" asp-append-version="true" class="card-img-top" /></a>
+        <p style="text-align:center">@auto.Price €</p>
         <div class="card-body">
-            <h4 class="text-cars">@auto.Brand</h4>
+            <h4 class="text-cars" style="text-align:center">@auto.Brand</h4>
             <ul class="">
                 <div class="text-right">
                     @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
