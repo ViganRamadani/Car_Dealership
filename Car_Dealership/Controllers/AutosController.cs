@@ -12,6 +12,13 @@ using Microsoft.AspNetCore.Hosting;
 using Car_Dealership.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
+using Syncfusion.Drawing;
+using System.IO;
+using Syncfusion.Pdf.Grid;
+using System.Data;
+using ClosedXML.Excel;
 
 namespace Car_Dealership.Controllers
 {
@@ -87,6 +94,42 @@ namespace Car_Dealership.Controllers
 
             return View(auto);
         }
+        [HttpPost]
+        public IActionResult Export()
+        {
+            DataTable dt = new DataTable("Grid");
+            dt.Columns.AddRange(new DataColumn[] { new DataColumn("Price"),
+                                        new DataColumn("Brand"),
+                                        new DataColumn("Auto_Production_Year"),
+                                        new DataColumn("Engine") ,
+                                        new DataColumn("Body_Type") ,
+                                        new DataColumn("Start_Production") ,
+                                        new DataColumn("End_Production") ,
+                                        new DataColumn("Sets") ,
+                                        new DataColumn("Doors") ,
+                                        new DataColumn("Acceleration") });
+
+            var customers = from customer in this._context.Autos.Take(10)
+                            select customer;
+
+            foreach (var a in _context.Autos)
+            {
+                dt.Rows.Add(a.Price, a.Brand, a.Auto_Production_Year, a.Engine ,a.Body_Type, a.Start_Production,
+                            a.End_Production, a.Sets, a.Doors, a.Acceleration);
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
+                }
+            }
+        }
+
+
         [AllowAnonymous]
         public IActionResult AddToFavorite(int id)
         {
