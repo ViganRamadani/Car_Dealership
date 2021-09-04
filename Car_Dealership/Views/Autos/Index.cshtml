@@ -1,0 +1,98 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> _signInManager;
+
+@model IEnumerable<Car_Dealership.Models.Auto>
+
+@{ ViewData["Title"] = "Cars";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+<link href="~/css/autoCars.css" rel="stylesheet" />
+<section class="w3l-about-breadcrumb position-relative text-center">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+        <div class="container py-lg-5 py-3">
+            <h2 class="title">All Cars</h2>
+            <ul class="breadcrumbs-custom-path mt-2">
+                <li><a asp-controller="About" asp-action="Index" />Home</li>
+                <li class="active"><span class="fa fa-angle-double-right mx-2" aria-hidden="true"></span> Cars </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<div id="smslogo"><a asp-controller="Home" asp-action="indexMessage"><img style=" width: 158px;" src="~/img/logoSms.png" alt="Alternate Text" /></a></div>
+<div class="container">
+    <form method="get" class="row" style="margin-top:18px;margin-left:15px;">
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="autoName" placeholder="Search by brand" />
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary mb-2" name="Find" value="Find" />
+
+        </div>
+    </form>
+    @if (_signInManager.IsSignedIn(User))
+    {
+        <a class="btn btn-light btn-sm" asp-action="DisplayFavorites">DisplayFavorites</a>
+    }
+
+    <a class="btn btn-light btn-sm" asp-action="Index" asp-route-sortByPrice="lowest">Order lowest to highest</a>
+    <a class="btn btn-light btn-sm" asp-action="Index" asp-route-sortByPrice="highest">Order highest to lowest</a>
+
+
+    <div class="row">
+        <div class="col-sm-12 mt-5">
+            <a class="btn btn-primary float-right btn btn-success " style="width:8%;" asp-action="Create">Add <i class="fas fa-plus"></i></a>
+        </div>
+    </div>
+    <div class="row">
+
+        @foreach (var auto in Model)
+        {
+            <div class="col-sm-4 mt-4">
+                <div id="app" class="card mb-3">
+                    <a asp-action="Details" asp-route-id="@auto.Id"><img src="~/img/@auto.Photo" asp-append-version="true" class="card-img-top" /></a>
+                    <p style="text-align:center">@auto.Price €</p>
+                    <div class="card-body">
+                        <h4 class="text-cars" style="text-align:center">@auto.Brand</h4>
+                        <ul class="">
+                            <div class="text-right">
+                                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                {
+
+                                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>
+                                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@auto.Id">Delete</a>}
+                                @if (_signInManager.IsSignedIn(User))
+                                {
+                                    <a class="btn btn-light btn-sm" asp-action="AddToFavorite" asp-route-id="@auto.Id">Favorite</a>}
+                                <a class="btn btn-light btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>}
+    </div>
+    <form method="post" asp-controller="Autos" asp-action="Export">
+        <input type="submit" value="Export" />
+    </form>
+</div>
+
+
+
+
+<style>
+    #app {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #smslogo {
+        position: fixed;
+        right: 133px;
+        bottom: 51px;
+        z-index: 500;
+        width: 18px;
+    }
+
+    .fa-comment-dots {
+        width: 100px;
+    }
+</style>
+

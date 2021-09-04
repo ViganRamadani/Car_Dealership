@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> _signInManager;
+@model List<Car_Dealership.Models.Auto>
+
+<div style="margin-top:135px;">
+    <h3 style="text-align:center;">Favorite</h3>
+</div>
+
+<div class="row">
+    @foreach (var auto in Model)
+    {
+<div class="col-sm-4 mt-4">
+    <div id="app" class="card mb-3">
+        <a asp-action="Details" asp-route-id="@auto.Id"><img src="~/img/@auto.Photo" asp-append-version="true" class="card-img-top" /></a>
+        <div class="card-body">
+            <h4 class="text-cars">@auto.Brand</h4>
+            <ul class="">
+                <div class="text-right">
+
+                    @if (_signInManager.IsSignedIn(User))
+                    {
+                        
+                        @*<a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>*@
+                         <a class="btn btn-light btn-sm" asp-action="DeleteFavorite" asp-route-id="@auto.Id">DeleteFavorite</a>
+                        }
+                        <a class="btn btn-light btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>}
+</div>
+<style>
+    .card-img-top {
+        margin: 3px;
+        width: 100%;
+        height: 155px;
+        object-fit: scale-down;
+    }
+
+    .text-cars {
+        color: #000000;
+        font-size: 17px;
+        margin-bottom: 20px;
+    }
+</style>
