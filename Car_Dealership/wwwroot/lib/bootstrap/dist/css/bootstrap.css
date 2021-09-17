@@ -573,7 +573,7 @@ mark,
 
 .img-fluid {
     max-width: 100%;
-    height: auto;
+    height: 350px;
 }
 
 .img-thumbnail {
@@ -3093,8 +3093,9 @@ fieldset:disabled a.btn {
         }
 
 .btn-outline-primary {
-    color: #011627;
-    border-color: #011627;
+    color: #fff;
+    border-color: #fff;
+    background-color: #091adc;
 }
 
     .btn-outline-primary:hover {
@@ -3129,8 +3130,8 @@ fieldset:disabled a.btn {
         }
 
 .btn-outline-secondary {
-    color: #1fa12e;
-    border-color: #1fa12e;
+    color: #787878;
+    border-color: #787878;
 }
 
     .btn-outline-secondary:hover {

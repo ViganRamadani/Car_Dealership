@@ -2,15 +2,26 @@
 @inject SignInManager<ApplicationUser> _signInManager;
 @model List<Car_Dealership.Models.Auto>
 
-<div style="margin-top:135px;">
-    <h3 style="text-align:center;">Favorite</h3>
-</div>
+<section class="w3l-about-breadcrumb position-relative text-center">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+        <div class="container py-lg-5 py-3">
+            <h2 class="title">All Cars</h2>
+            <ul class="breadcrumbs-custom-path mt-2">
+                <li style="color:firebrick">Home</li>
+                <li class="active"><span class="fa fa-angle-double-right mx-2" aria-hidden="true"></span> Favorites </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<div class="container">
 
-<div class="row">
-    @foreach (var auto in Model)
-    {
-<div class="col-sm-4 mt-4">
-    <div id="app" class="card mb-3">
+
+    <div class="row">
+        @foreach (var auto in Model)
+        {
+
+<div class="col-sm-4 mt-5">
+    <div id="app" class="card mb-5">
         <a asp-action="Details" asp-route-id="@auto.Id"><img src="~/img/@auto.Photo" asp-append-version="true" class="card-img-top" /></a>
         <div class="card-body">
             <h4 class="text-cars">@auto.Brand</h4>
@@ -18,29 +29,27 @@
                 <div class="text-right">
 
                     @if (_signInManager.IsSignedIn(User))
-                    {
-                        
-                        @*<a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>*@
-                         <a class="btn btn-light btn-sm" asp-action="DeleteFavorite" asp-route-id="@auto.Id">DeleteFavorite</a>
-                        }
-                        <a class="btn btn-light btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a>
+                    {@*<a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@auto.Id">Edit</a>*@
+                                        <a class="btn btn-danger btn-sm" asp-action="DeleteFavorite" asp-route-id="@auto.Id">DeleteFavorite</a>}
+                    <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@auto.Id">Details</a>
                 </div>
             </ul>
         </div>
     </div>
 </div>}
+
+    </div>
 </div>
 <style>
     .card-img-top {
-        margin: 3px;
         width: 100%;
-        height: 155px;
-        object-fit: scale-down;
+        height: 350px;
+        object-fit: cover;
     }
 
     .text-cars {
         color: #000000;
-        font-size: 17px;
+        font-size: 22px;
         margin-bottom: 20px;
     }
 </style>

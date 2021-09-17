@@ -6,104 +6,115 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/css/MeetingCss.css" rel="stylesheet" />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<div id="app">
+
+<section class="w3l-about-breadcrumb position-relative text-center">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+        <div class="container py-lg-5 py-3">
+            <h2 class="title">All Cars</h2>
+            <ul class="breadcrumbs-custom-path mt-2">
+                <li style="color:firebrick">Home</li>
+                <li class="active"><span class="fa fa-angle-double-right mx-2" aria-hidden="true"></span> Appointment </li>
+            </ul>
+        </div>
+    </div>
+</section>
 
 
-    @*<div v-for="meeting in meet_list">*@
-    @* <p>{{/*meeting.id*/}}</p>
-        <p>{{/*meeting.createdOn*/}}</p>
-        <p>{{/*meeting*/}}</p>*@
-   @* <button asp-action="Create" style="width:80%;" class=" btn-secondary justify-content-center mx-auto" >Create New</button>*@
-    <p style="text-align:center"><i>For this table is used Vue.Js Framework</i></p>
-    <table class="vue-table table-dark " border="1">
-        <tr>
-            <th><a class="btn btn-secondary justify-content-center " style="width:80%;" asp-action="Create">Create New</a></th>
-        </tr>
-        <tr>
-            
-            <th>Meeting ID</th>
-            <th>Meeting Time</th>
-            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-            {
-                <th>Users ID</th>
-            }
+<div class="container">
+    <div class="text-center mt-5">
+        <h5>For this table is used VueJs framework</h5>
+    </div>
+    
+    <div id="app" class="mt-5">
+
+
+        @*<div v-for="meeting in meet_list">*@
+        @* <p>{{/*meeting.id*/}}</p>
+            <p>{{/*meeting.createdOn*/}}</p>
+            <p>{{/*meeting*/}}</p>*@
+        @* <button asp-action="Create" style="width:80%;" class=" btn-secondary justify-content-center mx-auto" >Create New</button>*@
+
+        <table class="vue-table table-dark " border="1">
+            <tr>
+                <th><a class="btn btn-success justify-content-center mt-2 mb-2" style="width:25%;" asp-action="Create">+</a></th>
             </tr>
-        <tr v-for="meeting in meet_list">
-            <td>{{meeting.id}}</td>
-            <td>{{meeting.createdOn}}</td>
-            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-            {
-                <td>{{meeting.userId}}</td>
-            }
+            <tr>
 
-        </tr>
-
-    </table>
-    @*
-        </div>*@
-</div>
-
-<br />  
-<br />  
-<br />  
-<br />  
-<br />  
-<br />  
-<br />  
-<table class="asp-Table table table-dark"  border="1">
-    <thead>
-        <tr>
-            <th><a class="btn btn-secondary justify-content-center " style="width:80%;" asp-action="Create">Create New</a></th>
-            
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
+                <th>Meeting ID</th>
+                <th>Meeting Time</th>
                 @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-
                 {
-                    <a asp-action="Edit" style="color:white" class="btn-primary" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Delete" style="color:white" asp-route-id="@item.Id">Delete</a>
-                }
+    <th>Users ID</th>
+}
 
-                <a asp-action="Details" style="color:white; padding:6px;" class="btn-primary" asp-route-id="@item.Id">Details</a>
 
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+            </tr>
+            <tr v-for="meeting in meet_list">
+                <td>{{meeting.id}}</td>
+                <td>{{meeting.createdOn}}</td>
+                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+    <td>{{meeting.userId}}</td>
+}
 
+            </tr>
+
+        </table>
+        @*
+            </div>*@
+    </div>
+
+    <br />
+    
+    <br />
+
+    <table class="asp-Table table table-dark" border="1">
+        <thead>
+            <tr>
+                <th><a class="btn btn-success justify-content-center" style="width:70%" asp-action="Create">+</a></th>
+
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreatedOn)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserId)
+    </td>
+    <td>
+        @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+
+        {
+<a asp-action="Edit" style="color:white" class="btn-outline-info" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Delete" style="color:white" asp-route-id="@item.Id">Delete</a>}
+
+        <a asp-action="Details" style="color:white; padding:6px;" class="btn-outline-info" asp-route-id="@item.Id">Details</a>
+
+    </td>
+</tr>}
+        </tbody>
+    </table>
+
+</div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
 <script>
     let app = new Vue({
